@@ -149,6 +149,12 @@ header h1{
     gap: 10px;
 }
 
+#kick-buttons{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
 #score-buttons{
     display: flex;
     flex-wrap: wrap;
