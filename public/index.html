@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Fours Tracker</title>
+    <link rel="icon" type="image/png" href="images/91414__59311.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 title="Click to Reset" onclick="resetGame()">All Fours Tracker</h1>
+    </header>
+
+    <section id="initGame">
+        <button id="newGame" class="initButtons" onclick="initGame()">New Game</button>
+        <button id="resetGame" class="initButtons" onclick="resetGame()">Reset Game</button>
+    </section>
+
+    <main id="game-play">
+        <section id="team-1">
+            <h2 id="team1-name" title="Click to Edit Name" onclick="showModal('editTeamModal', 'Team 1', 'team1-name')">Team 1</h2>
+        
+            <h3 class="totalScore" id="team-1-score">0</h3>
+            <div class="score-nav">
+                <div id="score-buttons">
+                    <button id="high-team1" onclick="addPoints('high', 1, 1)">High</button>
+                    <button id="low-team1" onclick="addPoints('low', 1, 1)">Low</button>
+                    <button id="jack-team1" onclick="addPoints('jack', 1, 1)">Jack</button>
+                    <button id="hang-team1" onclick="addPoints('hang', 1, 3)">Hang-Jack</button>
+                    <button id="game-team1" onclick="addPoints('game', 1, 1)">Game</button>
+                    <button id="add-one-team1" onclick="addPoints('add-one', 1, 1)">+1</button>
+                    <button id="minus-one-team1" onclick="addPoints('minus-one', 1, -1)">-1</button>
+                </div>
+
+                <div id="kick-buttons">
+                    <button id="kick-six-team1" onclick="addPoints('six', 1, 2)">Kick 6 (+2)</button>
+                    <button id="kick-ace-team1" onclick="addPoints('ace', 1, 1)">Kick A (+1)</button>
+                    <button id="kick-jack-team1" onclick="addPoints('jack', 1, 3)">Kick Jack (+3)</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="team-2">
+            <h2 id="team2-name" title="Click to Edit Name" onclick="showModal('editTeamModal', 'Team 2', 'team2-name')">Team 2</h2>
+            <h3 class="totalScore" id="team-2-score">0</h3>
+            <div class="score-nav">
+                <div id="score-buttons">
+                    <button id="high-team2" onclick="addPoints('high', 2, 1)">High</button>
+                    <button id="low-team2" onclick="addPoints('low', 2, 1)">Low</button>
+                    <button id="jack-team2" onclick="addPoints('jack', 2, 1)">Jack</button>
+                    <button id="hang-team2" onclick="addPoints('hang', 2, 3)">Hang-Jack</button>
+                    <button id="game-team2" onclick="addPoints('game', 2, 1)">Game</button>
+                    <button id="add-one-team2" onclick="addPoints('add-one', 2, 1)">+1</button>
+                    <button id="minus-one-team2" onclick="addPoints('minus-one', 2, -1)">-1</button>
+                </div>
+
+                <div id="kick-buttons">
+                    <button id="kick-six-team2" onclick="addPoints('six', 2, 2)">Kick 6 (+2)</button>
+                    <button id="kick-ace-team2" onclick="addPoints('ace', 2, 1)">Kick A (+1)</button>
+                    <button id="kick-jack-team2" onclick="addPoints('jack', 2, 3)">Kick Jack (+3)</button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="editTeamModal" class="auth-modal">
+        <div class="modal-content">
+            <h2 id="edit-team">Edit Name</h2>
+            <input type="name" id="team-name" placeholder="Enter Name">
+
+            <h3 class="errorMsg" id="error">Invalid Input</h3>
+
+            <div class="acc-buttons">
+                <button onclick="editName()">Confirm</button>
+                <button onclick="closeModal('editTeamModal')">Cancel</button>
+            </div>               
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

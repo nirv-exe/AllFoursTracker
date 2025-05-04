@@ -1,0 +1,166 @@
+const firebaseConfig = {
+    apiKey: "AIzaSyDSzflwqfyQjjQUv9SmNKQqtI44wON4uDg",
+    authDomain: "all-fours-tracker.firebaseapp.com",
+    projectId: "all-fours-tracker",
+    storageBucket: "all-fours-tracker.firebasestorage.app",
+    messagingSenderId: "500056857098",
+    appId: "1:500056857098:web:854059605c682660ec9df3"
+};
+
+let team1Score = 0;
+let team2Score = 0;
+
+function initGame(){
+    team1Score = 0;
+    team2Score = 0;
+    document.getElementById('team1-name').textContent = "Team 1";
+    document.getElementById('team2-name').textContent = "Team 2";
+    document.getElementById('team-1-score').textContent = "0";
+    document.getElementById('team-2-score').textContent = "0";
+
+    const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
+
+    allPointButtons.forEach(btn => {
+        if (btn.id.includes('team1')) {
+            btn.disabled = false;
+        } else if (btn.id.includes('team2')) {
+            btn.disabled = false;
+        }
+    });
+
+    updateScoreDisplay();
+    updateButtonStates();
+}
+
+function resetGame(){
+    document.getElementById('team-1-score').textContent = "0";
+    document.getElementById('team-2-score').textContent = "0";
+    team1Score = 0;
+    team2Score = 0;
+
+    const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
+
+    allPointButtons.forEach(btn => {
+        if (btn.id.includes('team1')) {
+            btn.disabled = false;
+        } else if (btn.id.includes('team2')) {
+            btn.disabled = false;
+        }
+    });
+
+    updateScoreDisplay();
+    updateButtonStates();
+}
+
+function updateScoreDisplay() {
+    document.getElementById('team-1-score').textContent = team1Score;
+    document.getElementById('team-2-score').textContent = team2Score;
+}
+
+function updateButtonStates() {
+    const addOneTeam1 = document.getElementById('add-one-team1');
+    const minusOneTeam1 = document.getElementById('minus-one-team1');
+
+    const addOneTeam2 = document.getElementById('add-one-team2');
+    const minusOneTeam2 = document.getElementById('minus-one-team2');
+
+    addOneTeam1.disabled = team1Score >= 14;
+    minusOneTeam1.disabled = team1Score <= 0;
+
+    addOneTeam2.disabled = team2Score >= 14;
+    minusOneTeam2.disabled = team2Score <= 0;
+
+    const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
+
+    allPointButtons.forEach(btn => {
+
+        if (btn.id.includes('add-one') || btn.id.includes('minus-one')) return;
+
+        if (btn.id.includes('team1')) {
+            btn.disabled = team1Score >= 14;
+        } else if (btn.id.includes('team2')) {
+            btn.disabled = team2Score >= 14;
+        }
+    });
+}
+
+function changeTeam1Score(amount) {
+    team1Score += amount;
+
+    if (team1Score > 14)
+        team1Score = 14;
+
+    updateScoreDisplay();
+    updateButtonStates();
+}
+
+function changeTeam2Score(amount) {
+    team2Score += amount;
+
+    if (team2Score > 14)
+        team2Score = 14;
+    
+    updateScoreDisplay();
+    updateButtonStates();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    initGame();
+
+    updateScoreDisplay();
+    updateButtonStates();
+});
+
+window.addPoints = function(type, team, points) {
+    console.log(points, type);
+
+    if (team == 1)
+        changeTeam1Score(points);
+    else if (team == 2)
+        changeTeam2Score(points);
+
+    updateScoreDisplay();
+    updateButtonStates();
+};
+
+window.closeModal = function(id) {
+    document.getElementById(id).style.display = 'none';
+    
+    let teamName = document.getElementById('edit-team');
+
+    teamName.classList = '';
+    
+    document.getElementById('team-name').value = "";
+
+    stopError();
+};
+
+window.showModal = function(id, team, teamID) {
+    document.getElementById(id).style.display = 'block';
+
+    document.getElementById('edit-team').textContent = `Edit ${team} Name`;
+    document.getElementById('edit-team').classList.add(teamID);
+};
+
+function displayError(){
+    document.getElementById('error').style.display = 'block';
+}
+
+function stopError(){
+    document.getElementById('error').style.display = 'none';
+}
+
+window.editName = function(){
+    const id = document.getElementById('edit-team').className;
+
+    if (document.getElementById('team-name').value === ''){
+        displayError();
+    } else{
+        document.getElementById(id).textContent = document.getElementById('team-name').value;
+        closeModal('editTeamModal');
+    }
+}
+
+
+
