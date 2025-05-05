@@ -9,13 +9,17 @@ const firebaseConfig = {
 
 let team1Score = 0;
 let team2Score = 0;
+let team1Name = "Team 1";
+let team2Name = "Team 2";
 let game = 1;
 
 function initGame(){
     team1Score = 0;
     team2Score = 0;
-    document.getElementById('team1-name').textContent = "Team 1";
-    document.getElementById('team2-name').textContent = "Team 2";
+    team1Name = "Team 1";
+    team2Name = "Team 2";
+    document.getElementById('team1-name').textContent = team1Name;
+    document.getElementById('team2-name').textContent = team2Name;
     document.getElementById('team-1-score').textContent = "0";
     document.getElementById('team-2-score').textContent = "0";
 
@@ -125,9 +129,34 @@ window.addPoints = function(type, team, points) {
     else if (team == 2)
         changeTeam2Score(points);
 
+    checkWin(team);
     updateScoreDisplay();
     updateButtonStates();
 };
+
+function checkWin(){
+    if(team1Score === 14){
+        showModal('victoryTeamModal');
+        document.getElementById('win-team').textContent = `${team1Name} Wins!`;
+        document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
+        document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
+
+        setTimeout(() =>{
+            closeModal('victoryTeamModal');
+            resetGame();
+        }, 10000);
+    } else if(team2Score === 14){
+        showModal('victoryTeamModal',);
+        document.getElementById('win-team').textContent = `${team2Name} Wins!`;
+        document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
+        document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
+
+        setTimeout(() =>{
+            closeModal('victoryTeamModal');
+            resetGame();
+        }, 10000);
+    }
+}
 
 window.closeModal = function(id) {
     document.getElementById(id).style.display = 'none';
@@ -135,11 +164,16 @@ window.closeModal = function(id) {
     let teamName = document.getElementById('edit-team');
 
     teamName.classList = '';
-    
+
     document.getElementById('team-name').value = "";
 
     stopError();
 };
+
+window.endGame = function(id){
+    closeModal(id);
+    resetGame(); 
+}
 
 window.showModal = function(id, team, teamID) {
     document.getElementById(id).style.display = 'block';
@@ -158,6 +192,15 @@ function stopError(){
 
 window.editName = function(){
     const id = document.getElementById('edit-team').className;
+
+    if(id.includes("team1")){
+        team1Name = document.getElementById('team-name').value;
+    }
+    else if(id.includes("team2")){
+        team2Name = document.getElementById('team-name').value;
+    }
+
+    console.log(team1Name, team2Name);
 
     if (document.getElementById('team-name').value === ''){
         displayError();

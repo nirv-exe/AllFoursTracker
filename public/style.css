@@ -236,6 +236,25 @@ header h1{
     cursor: pointer;
 }
 
+.cancel{
+    font-family: "Lexend", sans-serif;
+    background-color: #bfbfbf;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 75%;
+}
+
+.cancel:active{
+    background-color: #ff3333;
+    border: none;
+    box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
+    -webkit-box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
+    -moz-box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
+}
+
 .acc-buttons button:active{
     background-color: #d9d9d9;
     border: none;
