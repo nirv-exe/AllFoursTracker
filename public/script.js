@@ -142,8 +142,7 @@ function checkWin(){
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
 
         setTimeout(() =>{
-            closeModal('victoryTeamModal');
-            resetGame();
+            endGame('victoryTeamModal');
         }, 10000);
     } else if(team2Score === 14){
         showModal('victoryTeamModal',);
@@ -152,8 +151,7 @@ function checkWin(){
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
 
         setTimeout(() =>{
-            closeModal('victoryTeamModal');
-            resetGame();
+            endGame('victoryTeamModal');
         }, 10000);
     }
 }
