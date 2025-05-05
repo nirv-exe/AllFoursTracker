@@ -178,7 +178,7 @@ function leftClick() {
 }
 
 function rightClick() {
-	btn.style.left = '150px';
+	btn.style.left = '162.5px';
     document.getElementById('left-btn').style.color = 'black';
     document.getElementById('right-btn').style.color = 'white';
     game = 2;
