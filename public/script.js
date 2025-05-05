@@ -39,10 +39,10 @@ function initGame(){
 }
 
 function resetGame(){
-    document.getElementById('team-1-score').textContent = "0";
-    document.getElementById('team-2-score').textContent = "0";
     team1Score = 0;
     team2Score = 0;
+    document.getElementById('team-1-score').textContent = "0";
+    document.getElementById('team-2-score').textContent = "0";
 
     const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
 
@@ -111,7 +111,6 @@ function changeTeam2Score(amount) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     initGame();
 
     updateScoreDisplay();
@@ -140,19 +139,11 @@ function checkWin(){
         document.getElementById('win-team').textContent = `${team1Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
-
-        setTimeout(() =>{
-            endGame('victoryTeamModal');
-        }, 10000);
     } else if(team2Score === 14){
         showModal('victoryTeamModal',);
         document.getElementById('win-team').textContent = `${team2Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
-
-        setTimeout(() =>{
-            endGame('victoryTeamModal');
-        }, 10000);
     }
 }
 
