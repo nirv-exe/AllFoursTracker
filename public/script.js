@@ -9,6 +9,7 @@ const firebaseConfig = {
 
 let team1Score = 0;
 let team2Score = 0;
+let game = 1;
 
 function initGame(){
     team1Score = 0;
@@ -28,6 +29,7 @@ function initGame(){
         }
     });
 
+    leftClick();
     updateScoreDisplay();
     updateButtonStates();
 }
@@ -115,6 +117,9 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addPoints = function(type, team, points) {
     console.log(points, type);
 
+    if (type === 'game')
+        points = game;
+
     if (team == 1)
         changeTeam1Score(points);
     else if (team == 2)
@@ -160,6 +165,23 @@ window.editName = function(){
         document.getElementById(id).textContent = document.getElementById('team-name').value;
         closeModal('editTeamModal');
     }
+}
+
+let btn = document.getElementById('btn')
+
+
+function leftClick() {
+	btn.style.left = '0';
+    document.getElementById('right-btn').style.color = 'black';
+    document.getElementById('left-btn').style.color = 'white';
+    game = 1;
+}
+
+function rightClick() {
+	btn.style.left = '150px';
+    document.getElementById('left-btn').style.color = 'black';
+    document.getElementById('right-btn').style.color = 'white';
+    game = 2;
 }
 
 
