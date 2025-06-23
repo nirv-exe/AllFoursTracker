@@ -75,7 +75,7 @@ header h1{
     flex-wrap: wrap;
     width: 100%;
     padding: 15px 30px 30px 30px;
-    gap: 50px;
+    gap: 10px;
 }
 
 #game-play{
@@ -403,11 +403,11 @@ input#check{
 }
 
 #settings-icon{
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     position: absolute;
-    right: 25px;
-    top: 20px;
+    right: 5px;
+    top: 5px;
     margin: 0;
     padding: 0;
     cursor: pointer;
