@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 @keyframes mainAnim {
@@ -23,7 +24,6 @@ html, body{
 
 body{
     background-color:  #4d4d4d;
-    scroll-behavior: smooth;
 }
 
 header{
