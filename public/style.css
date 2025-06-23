@@ -23,6 +23,7 @@ html, body{
 
 body{
     background-color:  #4d4d4d;
+    scroll-behavior: smooth;
 }
 
 header{
@@ -106,7 +107,7 @@ header h1{
     background-color: #d9d9d9;
     color: white;
     border-radius: 15px;
-    width: auto;
+    width: 355px;
     box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.55);
     -webkit-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.55);
     -moz-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.55);
@@ -115,6 +116,7 @@ header h1{
     justify-content: center;
     align-items: center;
     animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
+    
 }
 
 #team-1{
@@ -170,8 +172,7 @@ svg{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1.5em;
-    padding-top: 0.75em;
+    padding: 0.75em 0 0.75em 0;
     gap: 10px;
 }
 
@@ -179,12 +180,13 @@ svg{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 #score-buttons{
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 60%;
     padding: 10px;
     gap: 10px;
     justify-content: space-evenly;
@@ -299,6 +301,7 @@ svg{
 	position: relative;
 	border-radius: 30px;
 	background: #fff;
+    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
 }
 
 .button-box button{
@@ -315,6 +318,7 @@ svg{
 	outline: none;
 	position: relative;
 	text-align: center;
+    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
 }
 
 #btn {
@@ -328,3 +332,84 @@ svg{
 	transition: .5s;
 }
 
+#points{
+    color: white;
+    display: none;
+    background-color: #999999;
+    padding: 5px 25px 5px 25px;
+    border-radius: 15px;
+}
+
+#points h1{
+    margin: 0;
+    font-size: 2.5em;
+}
+
+a{
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+#t1-score{
+    color:#0066ff;
+}
+
+#t2-score{
+    color:#cc0000;
+}
+
+.container{
+    width: 200px;
+    height: 100px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.button{
+    background-color: #d2d2d2;
+    width: 100px;
+    height: 35px;
+    border-radius: 200px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s ease;
+}
+
+.button::before{
+    position: absolute;
+    content: '';
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 200px;
+    margin: 5px;
+    transition: 0.2s ease;
+}
+
+input:checked + .button{
+    background-color: #1a53ff;
+}
+
+input:checked + .button::before{
+    transform: translateX(35px);
+}
+
+input#check{
+    display: none;
+}
+
+#settings-icon{
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
+}

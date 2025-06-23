@@ -22,6 +22,8 @@ function initGame(){
     document.getElementById('team2-name').textContent = team2Name;
     document.getElementById('team-1-score').textContent = "0";
     document.getElementById('team-2-score').textContent = "0";
+    document.getElementById('points').style.display = 'none';
+    document.getElementById('check').checked = true;
 
     const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
 
@@ -36,6 +38,7 @@ function initGame(){
     leftClick();
     updateScoreDisplay();
     updateButtonStates();
+    updateSettings();
 }
 
 function resetGame(){
@@ -43,6 +46,7 @@ function resetGame(){
     team2Score = 0;
     document.getElementById('team-1-score').textContent = "0";
     document.getElementById('team-2-score').textContent = "0";
+    document.getElementById('points').style.display = 'none';
 
     const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
 
@@ -60,7 +64,9 @@ function resetGame(){
 
 function updateScoreDisplay() {
     document.getElementById('team-1-score').textContent = team1Score;
+    document.getElementById('t1-score').textContent = team1Score;
     document.getElementById('team-2-score').textContent = team2Score;
+    document.getElementById('t2-score').textContent = team2Score;
 }
 
 function updateButtonStates() {
@@ -88,6 +94,16 @@ function updateButtonStates() {
             btn.disabled = team2Score >= 14;
         }
     });
+}
+
+function updateSettings(){
+    if ((team1Score > 0 || team2Score > 0) && toggle()){
+        document.getElementById('points').style.display = 'block';
+    }
+    else{
+        document.getElementById('points').style.display = 'none';
+    }
+    closeModal('settingsModal');
 }
 
 function changeTeam1Score(amount) {
@@ -130,12 +146,18 @@ window.addPoints = function(type, team, points) {
 
     checkWin(team);
     updateScoreDisplay();
+    updateSettings();
     updateButtonStates();
 };
 
 function checkWin(){
     if(team1Score === 14){
         showModal('victoryTeamModal');
+        confetti({
+            particleCount: 150,
+            spread : 100,
+            origin: {y: 0.5}
+        })
         document.getElementById('win-team').textContent = `${team1Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
@@ -214,6 +236,18 @@ function rightClick() {
     document.getElementById('left-btn').style.color = 'black';
     document.getElementById('right-btn').style.color = 'white';
     game = 2;
+}
+
+function toggle(){
+    const isChecked = document.getElementById('check').checked;
+
+   if (isChecked){
+        return true;
+        console.log("Button Checked");
+   } else{
+        return false;
+        console.log("Button Not Checked");
+    }
 }
 
 
