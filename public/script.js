@@ -156,7 +156,8 @@ function checkWin(){
         confetti({
             particleCount: 150,
             spread : 100,
-            origin: {y: 0.5}
+            origin: {y: 0.5},
+            zIndex: 1000
         })
         document.getElementById('win-team').textContent = `${team1Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
