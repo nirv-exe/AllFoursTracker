@@ -1,169 +1,338 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Fours Tracker</title>
-    <link rel="icon" type="image/png" href="images/91414__59311.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="icon" type="image/png" href="images/91414__59311.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <h1 title="Click to Reset" onclick="resetGame()">All Fours Tracker</h1>
+      <h1 title="Click to Reset" onclick="resetGame()">All Fours Tracker</h1>
 
-        <div  class="settings-icon" onclick="showModal('settingsModal')">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256" id="settings-icon">
-                <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+      <div class="sidebar">
+        <div class="settings-icon" onclick="showModal('settingsModal')">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            width="100"
+            height="100"
+            viewBox="0,0,256,256"
+            id="settings-icon"
+            >
+            <g
+                fill="#ffffff"
+                fill-rule="nonzero"
+                stroke="none"
+                stroke-width="1"
+                stroke-linecap="butt"
+                stroke-linejoin="miter"
+                stroke-miterlimit="10"
+                stroke-dasharray=""
+                stroke-dashoffset="0"
+                font-family="none"
+                font-weight="none"
+                font-size="none"
+                text-anchor="none"
+                style="mix-blend-mode: normal"
+            >
                 <g transform="scale(4,4)">
-                <path d="M29.05469,10c-1.339,0 -2.48298,0.9642 -2.70898,2.2832l-0.58203,3.38086c-0.306,
-                0.117 -0.6112,0.23809 -0.9082,0.37109l-2.79687,-1.97656c-1.228,-0.849 -2.67525,-0.53827 
-                -3.53125,0.30273l-4.16602,4.16406c-0.947,0.947 -1.07278,2.43725 -0.30078,3.53125l1.97461,
-                2.79883c-0.134,0.297 -0.25409,0.60025 -0.37109,0.90625l-3.38086,0.58203c-1.32,0.227 -2.2832,1.37194 
-                -2.2832,2.71094v5.89062c0,1.339 0.9642,2.48298 2.2832,2.70898l3.38086,0.58203c0.117,0.306 0.23809,0.6112 0.37109
-                ,0.9082l-1.97656,2.79688c-0.772,1.093 -0.64427,2.58425 0.30273,3.53125l4.16406,4.16602c1.084,1.06 2.59925,0.97578 3.53125,
-                0.30078l2.79883,-1.97461c0.297,0.134 0.60025,0.25409 0.90625,0.37109l0.58203,3.38086c0.227,1.32 1.37194,2.2832 2.71094,
-                2.2832h5.89062c1.339,0 2.48298,-0.9642 2.70898,-2.2832l0.58203,-3.38086c0.306,-0.117 0.6112,-0.23809 0.9082,-0.37109l2.79688,
-                1.97656c0.825,0.608 2.40225,0.82727 3.53125,-0.30273l4.16602,-4.16406c0.947,-0.947 1.07278,-2.43725 0.30078,-3.53125l-1.97461,
-                -2.79883c0.134,-0.297 0.25409,-0.60025 0.37109,-0.90625l3.38086,-0.58203c1.32,-0.227 2.2832,-1.37194 2.2832,-2.71094v-5.89062c0,
-                -1.339 -0.9642,-2.48298 -2.2832,-2.70898l-3.38086,-0.58203c-0.117,-0.306 -0.23809,-0.6112 -0.37109,-0.9082l1.97656,-2.79687c0.772,
-                -1.093 0.64427,-2.58425 -0.30273,-3.53125l-4.16406,-4.16602c-1.057,-1.032 -2.52225,-1.00978 -3.53125,-0.30078l-2.79883,1.97461c-0.297,
-                -0.134 -0.60025,-0.25409 -0.90625,-0.37109l-0.58203,-3.38086c-0.227,-1.32 -1.37194,-2.2832 -2.71094,-2.2832zM30.21484,14h3.57227c0.061,
-                0 0.11305,0.04352 0.12305,0.10352l0.77148,4.48633c1.768,0.635 3.4232,1.3043 4.9082,2.0293l3.71289,-2.62305c0.05,-0.035 0.11911,-0.02933 0.16211,
-                0.01367l2.52539,2.52734c0.043,0.043 0.05062,0.11016 0.01563,0.16016l-2.625,3.71484c0.759,1.605 1.4433,3.23725 2.0293,4.90625l4.48633,0.77344c0.06,
-                0.01 0.10352,0.06205 0.10352,0.12305v3.57227c0,0.061 -0.04447,0.11305 -0.10547,0.12305l-4.48437,0.77148c-0.585,1.669 -1.2613,3.3042 -2.0293,4.9082l2.625,
-                3.71484c0.035,0.05 0.02737,0.11716 -0.01562,0.16016l-2.52539,2.52734c-0.043,0.043 -0.11211,0.04867 -0.16211,0.01367l-3.71289,-2.62305c-1.64,0.771 -3.2762,
-                1.4463 -4.9082,2.0293l-0.77344,4.48438c-0.01,0.06 -0.06205,0.10352 -0.12305,0.10352h-3.57227c-0.061,0 -0.11305,-0.04447 -0.12305,-0.10547l-0.77148,-4.48437c-1.609,-0.559 -3.2432,-1.2253 -4.9082,-2.0293l-3.71484,2.625c-0.05,0.035 -0.11716,0.02737 -0.16016,-0.01562l-2.52734,-2.52539c-0.043,-0.043 -0.04867,-0.11211 -0.01367,-0.16211l2.62305,-3.71289c-0.779,-1.665 -1.4553,-3.3012 -2.0293,-4.9082l-4.48437,-0.77344c-0.06,-0.01 -0.10352,-0.06205 -0.10352,-0.12305v-3.57227c0,-0.061 0.04352,-0.11205 0.10352,-0.12305l4.48633,-0.77344c0.581,-1.636 1.2473,-3.27125 2.0293,-4.90625l-2.625,-3.71484c-0.035,-0.05 -0.02737,-0.11716 0.01563,-0.16016l2.52539,-2.52734c0.043,-0.043 0.11211,-0.04867 0.16211,-0.01367l3.71289,2.62305c1.548,-0.743 3.1892,-1.4153 4.9082,-2.0293l0.77344,-4.48437c0.01,-0.06 0.06205,-0.10352 0.12305,-0.10352zM32,23c-4.971,0 -9,4.029 -9,9c0,4.971 4.029,9 9,9c4.971,0 9,-4.029 9,-9c0,-4.971 -4.029,-9 -9,-9zM32,27c2.761,0 5,2.239 5,5c0,2.761 -2.239,5 -5,5c-2.761,0 -5,-2.239 -5,-5c0,-2.761 2.239,-5 5,-5z"></path></g></g>
+                <path
+                    d="M29.05469,10c-1.339,0 -2.48298,0.9642 -2.70898,2.2832l-0.58203,3.38086c-0.306,
+                    0.117 -0.6112,0.23809 -0.9082,0.37109l-2.79687,-1.97656c-1.228,-0.849 -2.67525,-0.53827 
+                    -3.53125,0.30273l-4.16602,4.16406c-0.947,0.947 -1.07278,2.43725 -0.30078,3.53125l1.97461,
+                    2.79883c-0.134,0.297 -0.25409,0.60025 -0.37109,0.90625l-3.38086,0.58203c-1.32,0.227 -2.2832,1.37194 
+                    -2.2832,2.71094v5.89062c0,1.339 0.9642,2.48298 2.2832,2.70898l3.38086,0.58203c0.117,0.306 0.23809,0.6112 0.37109
+                    ,0.9082l-1.97656,2.79688c-0.772,1.093 -0.64427,2.58425 0.30273,3.53125l4.16406,4.16602c1.084,1.06 2.59925,0.97578 3.53125,
+                    0.30078l2.79883,-1.97461c0.297,0.134 0.60025,0.25409 0.90625,0.37109l0.58203,3.38086c0.227,1.32 1.37194,2.2832 2.71094,
+                    2.2832h5.89062c1.339,0 2.48298,-0.9642 2.70898,-2.2832l0.58203,-3.38086c0.306,-0.117 0.6112,-0.23809 0.9082,-0.37109l2.79688,
+                    1.97656c0.825,0.608 2.40225,0.82727 3.53125,-0.30273l4.16602,-4.16406c0.947,-0.947 1.07278,-2.43725 0.30078,-3.53125l-1.97461,
+                    -2.79883c0.134,-0.297 0.25409,-0.60025 0.37109,-0.90625l3.38086,-0.58203c1.32,-0.227 2.2832,-1.37194 2.2832,-2.71094v-5.89062c0,
+                    -1.339 -0.9642,-2.48298 -2.2832,-2.70898l-3.38086,-0.58203c-0.117,-0.306 -0.23809,-0.6112 -0.37109,-0.9082l1.97656,-2.79687c0.772,
+                    -1.093 0.64427,-2.58425 -0.30273,-3.53125l-4.16406,-4.16602c-1.057,-1.032 -2.52225,-1.00978 -3.53125,-0.30078l-2.79883,1.97461c-0.297,
+                    -0.134 -0.60025,-0.25409 -0.90625,-0.37109l-0.58203,-3.38086c-0.227,-1.32 -1.37194,-2.2832 -2.71094,-2.2832zM30.21484,14h3.57227c0.061,
+                    0 0.11305,0.04352 0.12305,0.10352l0.77148,4.48633c1.768,0.635 3.4232,1.3043 4.9082,2.0293l3.71289,-2.62305c0.05,-0.035 0.11911,-0.02933 0.16211,
+                    0.01367l2.52539,2.52734c0.043,0.043 0.05062,0.11016 0.01563,0.16016l-2.625,3.71484c0.759,1.605 1.4433,3.23725 2.0293,4.90625l4.48633,0.77344c0.06,
+                    0.01 0.10352,0.06205 0.10352,0.12305v3.57227c0,0.061 -0.04447,0.11305 -0.10547,0.12305l-4.48437,0.77148c-0.585,1.669 -1.2613,3.3042 -2.0293,4.9082l2.625,
+                    3.71484c0.035,0.05 0.02737,0.11716 -0.01562,0.16016l-2.52539,2.52734c-0.043,0.043 -0.11211,0.04867 -0.16211,0.01367l-3.71289,-2.62305c-1.64,0.771 -3.2762,
+                    1.4463 -4.9082,2.0293l-0.77344,4.48438c-0.01,0.06 -0.06205,0.10352 -0.12305,0.10352h-3.57227c-0.061,0 -0.11305,-0.04447 -0.12305,-0.10547l-0.77148,-4.48437c-1.609,-0.559 -3.2432,-1.2253 -4.9082,-2.0293l-3.71484,2.625c-0.05,0.035 -0.11716,0.02737 -0.16016,-0.01562l-2.52734,-2.52539c-0.043,-0.043 -0.04867,-0.11211 -0.01367,-0.16211l2.62305,-3.71289c-0.779,-1.665 -1.4553,-3.3012 -2.0293,-4.9082l-4.48437,-0.77344c-0.06,-0.01 -0.10352,-0.06205 -0.10352,-0.12305v-3.57227c0,-0.061 0.04352,-0.11205 0.10352,-0.12305l4.48633,-0.77344c0.581,-1.636 1.2473,-3.27125 2.0293,-4.90625l-2.625,-3.71484c-0.035,-0.05 -0.02737,-0.11716 0.01563,-0.16016l2.52539,-2.52734c0.043,-0.043 0.11211,-0.04867 0.16211,-0.01367l3.71289,2.62305c1.548,-0.743 3.1892,-1.4153 4.9082,-2.0293l0.77344,-4.48437c0.01,-0.06 0.06205,-0.10352 0.12305,-0.10352zM32,23c-4.971,0 -9,4.029 -9,9c0,4.971 4.029,9 9,9c4.971,0 9,-4.029 9,-9c0,-4.971 -4.029,-9 -9,-9zM32,27c2.761,0 5,2.239 5,5c0,2.761 -2.239,5 -5,5c-2.761,0 -5,-2.239 -5,-5c0,-2.761 2.239,-5 5,-5z"
+                ></path>
+                </g>
+            </g>
             </svg>
         </div>
+
+        <div class="open-profile">
+            <svg
+            viewBox="0 0 20 20"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            fill="#ffffff"
+            stroke="#ffffff"
+            >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+                <title>profile_round [#ffffff]</title>
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g
+                id="Page-1"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+                >
+                <g
+                    id="Dribbble-Light-Preview"
+                    transform="translate(-140.000000, -2159.000000)"
+                    fill="#ffffff"
+                >
+                    <g id="icons" transform="translate(56.000000, 160.000000)">
+                    <path
+                        d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598"
+                        id="profile_round-[#ffffff]"
+                    ></path>
+                    </g>
+                </g>
+                </g>
+            </g>
+            </svg>
+        </div>
+      </div>
+
     </header>
 
     <section id="initGame">
-        <button id="newGame" class="initButtons" onclick="initGame()">New Game</button>
-        <button id="resetGame" class="initButtons" onclick="resetGame()">Reset Game</button>
+      <button id="newGame" class="initButtons" onclick="initGame()">
+        New Game
+      </button>
+      <button id="resetGame" class="initButtons" onclick="resetGame()">
+        Reset Game
+      </button>
     </section>
 
     <main>
-        <div class="form-box">
-            <div class="button-box">
-                <div id="btn"></div>
-                <button type="button" id="left-btn" class="toggle-btn" onclick="leftClick()">Game is 1</button>
-                <button type="button" id="right-btn" class="toggle-btn" onclick="rightClick()">Game is 2</button>
+      <div class="form-box">
+        <div class="button-box">
+          <div id="btn"></div>
+          <button
+            type="button"
+            id="left-btn"
+            class="toggle-btn"
+            onclick="leftClick()"
+          >
+            Game is 1
+          </button>
+          <button
+            type="button"
+            id="right-btn"
+            class="toggle-btn"
+            onclick="rightClick()"
+          >
+            Game is 2
+          </button>
+        </div>
+      </div>
+
+      <div id="points">
+        <h1>
+          <a href="#team-1" id="t1-score">0</a> -
+          <a href="#team-2" id="t2-score">0</a>
+        </h1>
+      </div>
+
+      <section id="game-play">
+        <section id="team-1" class="player-card">
+          <div
+            class="title"
+            onclick="showModal('editTeamModal', 'Team 1', 'team1-name')"
+          >
+            <h2 id="team1-name" title="Click to Edit Name">Team 1</h2>
+            <svg
+              xmlns="http://www.w3.oedirg/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5"
+            >
+              <path
+                d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z"
+              />
+              <path
+                d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z"
+              />
+            </svg>
+          </div>
+          <h3 class="totalScore" id="team-1-score">0</h3>
+          <div class="score-nav">
+            <div id="score-buttons">
+              <button id="high-team1" onclick="addPoints('high', 1, 1)">
+                High
+              </button>
+              <button id="low-team1" onclick="addPoints('low', 1, 1)">
+                Low
+              </button>
+              <button id="jack-team1" onclick="addPoints('jack', 1, 1)">
+                Jack
+              </button>
+              <button id="hang-team1" onclick="addPoints('hang', 1, 3)">
+                Hang-Jack
+              </button>
+              <button id="game-team1" onclick="addPoints('game', 1, 1)">
+                Game
+              </button>
+              <button id="add-one-team1" onclick="addPoints('add-one', 1, 1)">
+                +1
+              </button>
+              <button
+                id="minus-one-team1"
+                onclick="addPoints('minus-one', 1, -1)"
+              >
+                -1
+              </button>
             </div>
-        </div>
 
-        <div id="points">
-            <h1>
-                <a href="#team-1" id="t1-score">0</a> - <a href="#team-2" id="t2-score">0</a>
-            </h1>
-        </div>
-
-        <section id="game-play">
-            <section id="team-1" class="player-card">
-                <div class="title" onclick="showModal('editTeamModal', 'Team 1', 'team1-name')">
-                    <h2 id="team1-name" title="Click to Edit Name">Team 1</h2>
-                    <svg xmlns="http://www.w3.oedirg/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
-                        <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
-                    </svg>
-                </div>
-                <h3 class="totalScore" id="team-1-score">0</h3>
-                <div class="score-nav">
-                    <div id="score-buttons">
-                        <button id="high-team1" onclick="addPoints('high', 1, 1)">High</button>
-                        <button id="low-team1" onclick="addPoints('low', 1, 1)">Low</button>
-                        <button id="jack-team1" onclick="addPoints('jack', 1, 1)">Jack</button>
-                        <button id="hang-team1" onclick="addPoints('hang', 1, 3)">Hang-Jack</button>
-                        <button id="game-team1" onclick="addPoints('game', 1, 1)">Game</button>
-                        <button id="add-one-team1" onclick="addPoints('add-one', 1, 1)">+1</button>
-                        <button id="minus-one-team1" onclick="addPoints('minus-one', 1, -1)">-1</button>
-                    </div>
-
-                    <div id="kick-buttons">
-                        <button id="kick-six-team1" onclick="addPoints('six', 1, 2)">Kick 6 (+2)</button>
-                        <button id="kick-ace-team1" onclick="addPoints('ace', 1, 1)">Kick A (+1)</button>
-                        <button id="kick-jack-team1" onclick="addPoints('jack', 1, 3)">Kick Jack (+3)</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="team-2" class="player-card">
-
-                <div class="title" onclick="showModal('editTeamModal', 'Team 2', 'team2-name')">
-                    <h2 id="team2-name" title="Click to Edit Name">Team 2</h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-                        <path d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z" />
-                        <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z" />
-                    </svg> 
-                </div>
-
-                <h3 class="totalScore" id="team-2-score">0</h3>
-                <div class="score-nav">
-                    <div id="score-buttons">
-                        <button id="high-team2" onclick="addPoints('high', 2, 1)">High</button>
-                        <button id="low-team2" onclick="addPoints('low', 2, 1)">Low</button>
-                        <button id="jack-team2" onclick="addPoints('jack', 2, 1)">Jack</button>
-                        <button id="hang-team2" onclick="addPoints('hang', 2, 3)">Hang-Jack</button>
-                        <button id="game-team2" onclick="addPoints('game', 2, 1)">Game</button>
-                        <button id="add-one-team2" onclick="addPoints('add-one', 2, 1)">+1</button>
-                        <button id="minus-one-team2" onclick="addPoints('minus-one', 2, -1)">-1</button>
-                    </div>
-
-                    <div id="kick-buttons">
-                        <button id="kick-six-team2" onclick="addPoints('six', 2, 2)">Kick 6 (+2)</button>
-                        <button id="kick-ace-team2" onclick="addPoints('ace', 2, 1)">Kick A (+1)</button>
-                        <button id="kick-jack-team2" onclick="addPoints('jack', 2, 3)">Kick Jack (+3)</button>
-                    </div>
-                </div>
-
-            </section>
+            <div id="kick-buttons">
+              <button id="kick-six-team1" onclick="addPoints('six', 1, 2)">
+                Kick 6 (+2)
+              </button>
+              <button id="kick-ace-team1" onclick="addPoints('ace', 1, 1)">
+                Kick A (+1)
+              </button>
+              <button id="kick-jack-team1" onclick="addPoints('jack', 1, 3)">
+                Kick Jack (+3)
+              </button>
+            </div>
+          </div>
         </section>
+
+        <section id="team-2" class="player-card">
+          <div
+            class="title"
+            onclick="showModal('editTeamModal', 'Team 2', 'team2-name')"
+          >
+            <h2 id="team2-name" title="Click to Edit Name">Team 2</h2>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5"
+            >
+              <path
+                d="m5.433 13.917 1.262-3.155A4 4 0 0 1 7.58 9.42l6.92-6.918a2.121 2.121 0 0 1 3 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 0 1-.65-.65Z"
+              />
+              <path
+                d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0 0 10 3H4.75A2.75 2.75 0 0 0 2 5.75v9.5A2.75 2.75 0 0 0 4.75 18h9.5A2.75 2.75 0 0 0 17 15.25V10a.75.75 0 0 0-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5Z"
+              />
+            </svg>
+          </div>
+
+          <h3 class="totalScore" id="team-2-score">0</h3>
+          <div class="score-nav">
+            <div id="score-buttons">
+              <button id="high-team2" onclick="addPoints('high', 2, 1)">
+                High
+              </button>
+              <button id="low-team2" onclick="addPoints('low', 2, 1)">
+                Low
+              </button>
+              <button id="jack-team2" onclick="addPoints('jack', 2, 1)">
+                Jack
+              </button>
+              <button id="hang-team2" onclick="addPoints('hang', 2, 3)">
+                Hang-Jack
+              </button>
+              <button id="game-team2" onclick="addPoints('game', 2, 1)">
+                Game
+              </button>
+              <button id="add-one-team2" onclick="addPoints('add-one', 2, 1)">
+                +1
+              </button>
+              <button
+                id="minus-one-team2"
+                onclick="addPoints('minus-one', 2, -1)"
+              >
+                -1
+              </button>
+            </div>
+
+            <div id="kick-buttons">
+              <button id="kick-six-team2" onclick="addPoints('six', 2, 2)">
+                Kick 6 (+2)
+              </button>
+              <button id="kick-ace-team2" onclick="addPoints('ace', 2, 1)">
+                Kick A (+1)
+              </button>
+              <button id="kick-jack-team2" onclick="addPoints('jack', 2, 3)">
+                Kick Jack (+3)
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
     </main>
 
     <div id="editTeamModal" class="auth-modal">
-        <div id="edit" class="modal-content">
-            <h2 id="edit-team">Edit Name</h2>
-            <input type="name" id="team-name" placeholder="Enter Name">
+      <div id="edit" class="modal-content">
+        <h2 id="edit-team">Edit Name</h2>
+        <input type="name" id="team-name" placeholder="Enter Name" />
 
-            <h3 class="errorMsg" id="error">Invalid Input</h3>
+        <h3 class="errorMsg" id="error">Invalid Input</h3>
 
-            <div class="acc-buttons">
-                <button onclick="editName()">Confirm</button>
-                <button onclick="closeModal('editTeamModal')">Cancel</button>
-            </div>               
+        <div class="acc-buttons">
+          <button onclick="editName()">Confirm</button>
+          <button onclick="closeModal('editTeamModal')">Cancel</button>
         </div>
+      </div>
     </div>
 
     <div id="victoryTeamModal" class="auth-modal">
-        <div class="modal-content">
-            <h1 id="win-team">Team Name Wins!</h1>
+      <div class="modal-content">
+        <h1 id="win-team">Team Name Wins!</h1>
 
-            <h3 id="team1-scores">Team Name - Points</h3>
-            <h3 id="team2-scores">Team Name - Points</h3>
+        <h3 id="team1-scores">Team Name - Points</h3>
+        <h3 id="team2-scores">Team Name - Points</h3>
 
-            <button class="cancel" id="cancel-btn" onclick="endGame('victoryTeamModal')">Cancel</button>            
-        </div>
+        <button
+          class="cancel"
+          id="cancel-btn"
+          onclick="endGame('victoryTeamModal')"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
 
     <div id="settingsModal" class="auth-modal">
-        <div id="settings" class="modal-content">
-            <h1>Settings</h1>
-            <div class="container">
-                <h3>Score count at top</h3>
-                <input type="checkbox" id="check">
-                <label for="check" class="button"></label>
-            </div>
-
-            <div class="acc-buttons">
-                <button onclick="updateSettings()">Confirm</button>
-                <button onclick="closeModal('settingsModal')">Cancel</button>
-            </div>               
+      <div id="settings" class="modal-content">
+        <h1>Settings</h1>
+        <div class="container">
+          <h3>Score count at top</h3>
+          <input type="checkbox" id="check" />
+          <label for="check" class="button"></label>
         </div>
+
+        <div class="acc-buttons">
+          <button onclick="updateSettings()">Confirm</button>
+          <button onclick="closeModal('settingsModal')">Cancel</button>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
