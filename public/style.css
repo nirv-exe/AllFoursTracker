@@ -3,6 +3,12 @@
     scroll-behavior: smooth;
 }
 
+:root{
+    --t1-baseColor: #0033cc;
+    --t2-baseColor: #cc0000;
+    --background-color: #4d4d4d;
+}
+
 @keyframes mainAnim {
 	0% {
 		opacity: 0;
@@ -23,7 +29,7 @@ html, body{
 }
 
 body{
-    background-color:  #4d4d4d;
+    background-color:  hsl(from var(--background-color) h s l);
 }
 
 header{
@@ -121,16 +127,15 @@ header h1{
     justify-content: center;
     align-items: center;
     animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
-    
 }
 
 #team-1{
-    background-color: #0033cc;
+    background-color: hsl(from var(--t1-baseColor) h s l);
     margin: 25px;
 }
 
 #team-2{
-    background-color: #cc0000;
+    background-color: hsl(from var(--t2-baseColor) h s l);
     margin: 25px;
 }
 
@@ -162,14 +167,15 @@ svg{
 
 #team1-name, #team2-name{
     cursor: pointer;
+    mix-blend-mode: normal ;
 }
 
 #team-1 .totalScore{
-    background-color: #1a53ff;
+    background-color: hsl(from var(--t1-baseColor) h s calc(l + 15));
 }
 
 #team-2 .totalScore{
-    background-color: #ff3333;
+    background-color: hsl(from var(--t2-baseColor) h s calc(l + 20));
 }
 
 .score-nav{
@@ -422,6 +428,7 @@ input#check{
     width: 20px;
     height: 20px;
     animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
+    cursor: pointer;
 }
 
 .sidebar{
