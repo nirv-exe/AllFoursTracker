@@ -103,7 +103,8 @@ function updateSettings(){
     else{
         document.getElementById('points').style.display = 'none';
     }
-    closeModal('settingsModal');
+
+    closeMenu();
 }
 
 function changeTeam1Score(amount) {
@@ -250,6 +251,29 @@ function toggle(){
         console.log("Button Not Checked");
     }
 }
+
+function closeMenu(){
+    const toggleMenu = document.querySelector('.toggle-menu');
+    const menuContent = document.querySelector('.menu-content');
+    const menu = document.querySelector('.menu');
+    const confirmBtn = document.querySelector('#confirm-btn');
+
+    if (toggleMenu) toggleMenu.classList.remove('menu-open');
+    if (menuContent) menuContent.classList.remove('menu-content-open');
+    if (menu) menu.classList.remove('menu-open');
+    if (confirmBtn) confirmBtn.style.display = 'none';
+}
+
+document.querySelector('.nav-toggle').addEventListener('click', () => {
+    document.querySelector('.toggle-menu').classList.toggle('menu-open');
+    document.querySelector('.menu-content').classList.toggle('menu-content-open');
+    document.querySelector('.menu').classList.toggle('menu-open');
+    if (document.querySelector('.toggle-menu').classList.contains('menu-open')){
+        document.querySelector('#confirm-btn').style.display = 'flex';
+    } else{
+        document.querySelector('#confirm-btn').style.display = 'none';
+    }
+});
 
 
 
