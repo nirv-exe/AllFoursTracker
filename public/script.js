@@ -104,6 +104,15 @@ function updateSettings(){
         document.getElementById('points').style.display = 'none';
     }
 
+    const gameis2 = document.getElementById('check-game').checked;
+
+    if (gameis2){
+        rightClick();
+    }
+    else{
+        leftClick();
+    }
+
     closeMenu();
 }
 
@@ -241,14 +250,12 @@ function rightClick() {
 }
 
 function toggle(){
-    const isChecked = document.getElementById('check').checked;
+    const showTotal = document.getElementById('check').checked;
 
-   if (isChecked){
+   if (showTotal){
         return true;
-        console.log("Button Checked");
    } else{
         return false;
-        console.log("Button Not Checked");
     }
 }
 

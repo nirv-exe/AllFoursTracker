@@ -391,6 +391,14 @@ a{
     transition: 0.2s ease;
 }
 
+.gameCheck .button{
+    width: 82px;
+}
+
+#settings h1{
+    text-align: center;
+}
+
 .button::before{
     position: absolute;
     content: '';
@@ -410,114 +418,8 @@ input:checked + .button::before{
     transform: translateX(35px);
 }
 
-input#check{
+input#check, input#check-game{
     display: none;
-}
-
-#settings-icon{
-    width: 30px;
-    height: 30px;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
-}
-
-.open-profile svg{
-    padding: 0;
-    margin: 0;
-    width: 20px;
-    height: 20px;
-    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
-    cursor: pointer;
-}
-
-.sidebar{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    gap: 10px;
-    flex-wrap: wrap;
-    left: 5px;
-    top: 5px;
-}
-
-.sidebar #settings-icon{
-    position: relative;
-}
-
-.sidebar .open-profile{
-    position: relative;
-    top: 5px;
-    left: 5px;
-}
-
-@media (max-width: 360px){
-    .form-box{
-        transform: scale(0.9);
-    }
-
-    header h1{
-        font-size: 25px 
-    }
-
-    #initGame{
-        transform: scale(0.9);
-    }
-
-    .player-card{
-        width: 90vw;
-    }
-
-    #scoreButtons button{
-        font-size: 1.5rem;
-    }
-}
-
-@media (max-width: 320px){
-    header h1{
-        font-size: 25px;
-    }
-
-    .form-box{
-        transform: scale(0.8);
-    }
-
-    .modal-content{
-        width: 90%;
-    }
-}
-
-@media (max-width: 315px){
-    .initButtons{
-        font-size: 11px;
-    }
-
-    .player-card{
-        width: 90%;
-    }
-
-    #score-buttons button{
-        font-size: 1em;
-    }
-}
-
-@media (max-width: 300px){
-    header h1{
-        font-size: 20px;
-    }
-
-    .form-box{
-        transform: scale(0.7);
-    }
-
-    #initGame{
-        padding-bottom: 20px;
-    }
-
-    .initButtons{
-        font-size: 12px;
-    }
 }
 
 .toggle-menu{
@@ -563,7 +465,6 @@ input#check{
 .hbg-menu{
     display: block;
 }
-
 
 .hbg-menu,
 .hbg-menu::after,
@@ -614,18 +515,18 @@ input#check{
     width: 100vw;
     height: 100vh;
     background-color: hsl(from var(--background-color) h s l / 0.9);
-    z-index: 1;
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+    z-index: -5;
 }
 
 .menu.menu-open{
-    display: flex;
     opacity: 1;
+    z-index: 1;
 }
 
 .menu-content{
@@ -642,30 +543,180 @@ input#check{
     opacity: 1;
 }
 
-#open-settings{
-    height: 2.5em;
-    width: 20rem;
-    text-align: center;
-    border-radius: 10px;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
+.logo{
+    display: block;
 }
 
-#open-settings:hover{
-    background-color: #e6e6e6;
+#logo-img{
+    position: absolute;
+    height: 5em;
+    width: 5em;
+    left: 15px;
 }
 
-#open-settings:active{
-    background-color: #d9d9d9;
-    box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
-    -webkit-box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
-    -moz-box-shadow: 0px 0px 34px -25px rgba(0,0,0,0.75) inset;
+@media (max-width: 620px){
+    .form-box{
+        display: none;
+    }
+
+    .totalScore{
+        display: none;
+    }
+
+    .score-nav{
+        padding-top: 0;
+    }
+
+    .title h2{
+        margin: 25px 0;
+        font-size: 2rem;
+    }
+
+    .title svg{
+        margin-top: 25px;
+    }
+
+    #kick-buttons button, #score-buttons button{
+        font-size: 1.1rem;
+    }
+
+    #points{
+        width: 17em;
+        text-align: center;
+    }
 }
+
+@media (max-width: 605px){
+    #score-buttons{
+        width: 75%;
+    }
+}
+
+@media (max-width: 510px){
+    #score-buttons{
+        width: 90%;
+    }
+
+    #game-play{
+        gap: 0px;
+    }
+
+    #team-1, #team-2{
+        margin: 15px;
+    }
+}
+
+@media (max-width: 470px){
+    header h1{
+        display: none;
+    }
+
+    .menu h1{
+        display: block;
+    }
+
+    #game-play{
+        margin-top: 5px;
+    }
+
+    #initGame{
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 20px;
+        padding-top: 10px;
+    }
+
+    #logo-img{
+        left: 8px;
+        width: 4em;
+        height: 4em;
+    }
+
+    #kick-buttons button, #score-buttons button{
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 420px){
+    .initButtons{
+        font-size: 0.8em;
+        text-align: center;
+    }
+}
+
+@media (max-width: 410px){
+    .title h2{
+        margin: 25px 0;
+        font-size: 1.5rem;
+    }
+
+    .title svg{
+        margin-top: 25px;
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 370px){
+    #kick-buttons button, #score-buttons button{
+        font-size: 0.9rem;
+    }
+
+    #score-buttons{
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px){
+    .form-box{
+        transform: scale(0.9);
+    }
+
+    header h1{
+        font-size: 25px 
+    }
+
+    #initGame{
+        transform: scale(0.9);
+    }
+
+    .player-card{
+        width: 90vw;
+    }
+
+    #scoreButtons button{
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 320px){
+    header h1{
+        font-size: 25px;
+    }
+
+    .form-box{
+        transform: scale(0.8);
+    }
+
+    .modal-content{
+        width: 90%;
+    }
+}
+
+@media (max-width: 315px){
+    .initButtons{
+        font-size: 11px;
+    }
+
+    .player-card{
+        width: 90%;
+    }
+
+    #score-buttons button{
+        font-size: 1rem;
+    }
+}
+
+
+
 
