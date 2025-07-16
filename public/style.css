@@ -605,6 +605,10 @@ input#check, input#check-game{
         margin-top: 25px;
     }
 
+    .player-card{
+        max-width: 90vw;
+    }
+
     #kick-buttons button, #score-buttons button{
         font-size: 1.1rem;
     }
