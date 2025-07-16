@@ -434,10 +434,14 @@ input#check, input#check-game{
     position: absolute;
     top: 10px;
     right: 20px;
-    z-index: 5;
+    z-index: 0;
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.toggle-menu.menu-open{
+    z-index: 5;
 }
 
 #confirm-btn{
@@ -445,6 +449,9 @@ input#check, input#check-game{
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
+    font-family: "Lexend", sans-serif;
+    border-radius: 5px;
+    font-size: 1em;
     width: 10em;
     height: 2.5em;
     background-color: hsl(from var(--background-color) h s calc(l + 15));
