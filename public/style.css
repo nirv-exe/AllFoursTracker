@@ -149,6 +149,7 @@ header h1{
 
 .title{
     width: 100%;
+    max-width: 100%;
     text-align: center;
     display: flex;
     flex-direction: row;
