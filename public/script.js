@@ -278,5 +278,22 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
     document.querySelector('#confirm-btn').classList.toggle('showBtn');
 });
 
+window.openThemes = function(){
+    document.querySelector('#settings').classList.add('themes-open');
+
+    document.querySelector('.themes-menu').classList.add('openThemes');
+
+    document.querySelector('#back').style.display = 'flex';
+}
+
+window.backToSettings = function(){
+    document.querySelector('#settings').classList.remove('themes-open');
+
+    document.querySelector('.themes-menu').classList.remove('openThemes');
+
+    setTimeout(()=>{
+        document.querySelector('#back').style.display = 'none';
+    }, 300);
 
 
+}

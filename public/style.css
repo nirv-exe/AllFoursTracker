@@ -32,6 +32,7 @@ html, body{
     height: 100vh;
     width: 100vw;
     font-family: "Montserrat", sans-serif;
+    overflow-x: hidden;
 }
 
 body{
@@ -256,7 +257,7 @@ svg{
     gap: 10px;
     font-family: "Lexend", sans-serif;
     align-items: center;
-    animation: entranceAnim 0.5s ease-in-out 0s 1 normal forwards;
+    animation: entranceAnim 0.4s ease-in-out 0s 1 normal forwards;
 }
 
 .modal-content input{
@@ -379,8 +380,8 @@ a{
 }
 
 .container{
-    width: 200px;
-    height: 100px;
+    width: 275px;
+    height: 65px;
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -388,24 +389,37 @@ a{
     padding: 0;
     margin: 0;
     color: #d9d9d9;
+    position: relative;
 }
 
 .button{
     background-color: #d2d2d2;
-    width: 100px;
+    width: 60px;
     height: 35px;
     border-radius: 200px;
     cursor: pointer;
-    position: relative;
+    position: absolute;
     transition: 0.2s ease;
+    right: 10px;
+}
+
+.container h3{
+    position: absolute;
+    left: 0;
+}
+
+.gameCheck{
+    display: none;
 }
 
 .gameCheck .button{
-    width: 82px;
+    width: 60px;
 }
 
 #settings h1{
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .button::before{
@@ -424,7 +438,7 @@ input:checked + .button{
 }
 
 input:checked + .button::before{
-    transform: translateX(35px);
+    transform: translateX(25px);
 }
 
 input#check, input#check-game{
@@ -462,6 +476,7 @@ input#check, input#check-game{
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.25s ease-in-out, filter 0.25s ease;
     filter: blur(10px);
+    cursor: pointer;
 }
 
 #confirm-btn.showBtn{
@@ -550,6 +565,7 @@ input#check, input#check-game{
     transform: translateY(-100%);
     z-index: 1;
     filter: blur(10px);
+    overflow-x: hidden;
 }
 
 .menu.menu-open{
@@ -583,9 +599,175 @@ input#check, input#check-game{
     left: 15px;
 }
 
+#button-container::before{
+    content: '';
+    position: absolute;
+    background-color: white;
+    height: 2px;
+    width: 275px;
+    border-radius: 2px;
+}
+
+#button-container{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+#button-container button{
+    margin-top: 1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: hsl(from var(--background-color) h s calc(l + 15) / 0.7);
+    border: 1.5px #3335 solid;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#back{
+    background-color: hsl(from var(--background-color) h s calc(l + 15));
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 1rem;
+    z-index: 10;
+    cursor: pointer;
+}
+
+#back svg{
+    margin: 0;
+    width: 20px;
+    height: 20px;
+}
+
+#themes svg{
+    margin: 0;
+    height: 3rem;
+    width: 3rem;
+}
+
+#themes:hover{
+    background-color: hsl(from var(--background-color) h s calc(l + 20) / 0.7);
+}
+
+#back:hover{
+    background-color: hsl(from var(--background-color) h s calc(l + 25));
+}
+
+#themes:active, #back:active{
+    box-shadow: 0px 0px 26px -14px rgba(0,0,0,0.75) inset;
+-webkit-box-shadow: 0px 0px 26px -14px rgba(0,0,0,0.75) inset;
+-moz-box-shadow: 0px 0px 26px -14px rgba(0,0,0,0.75) inset;
+}
+
+#settings{
+    position: absolute;
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+#settings.themes-open{
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+    transform: translateX(-100vw);
+    opacity: 0;
+}
+
+.themes-menu{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    position: absolute;
+    width: 100vw;
+    height: 50vh;
+    transform: translateX(100vw);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.themes-menu.openThemes{
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.theme-sections{
+    display: flex;
+    gap: 1.5rem;
+}
+
+.themes-menu section{
+    border: 2px solid white;
+    padding: 15px;
+    border-radius: 10px;
+
+}
+
+.themeTitle{
+    text-align: center;
+    color: #fff;
+    margin: 0;
+    padding: 10px;
+}
+
+#themeMenuTitle{
+    font-size: 2rem;
+}
+
+.themes-menu section button{
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    background-color: hsl(from var(--background-color) h s calc(l + 15));
+    border: none;
+    border-radius: 10px;
+}
+
+/* Media queries */
+
+@media (max-width: 920px){
+
+    #themeMenuTitle{
+        font-size: 1.75rem;
+    }
+
+    .themeTitle{
+        font-size: 1.25rem;
+    }
+
+    .themes-menu section button{
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 800px){
+    .theme-sections{
+        flex-direction: column;
+    }
+}
+
 @media (max-width: 620px){
+    body{
+        overflow-x: hidden;
+    }
+
     .form-box{
         display: none;
+    }
+
+    .gameCheck{
+        display: block;
     }
 
     .totalScore{
@@ -616,6 +798,11 @@ input#check, input#check-game{
     #points{
         width: 17em;
         text-align: center;
+    }
+
+    #button-container button{
+        width: 3rem;
+        height: 3rem;
     }
 }
 
