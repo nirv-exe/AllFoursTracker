@@ -269,6 +269,7 @@ function closeMenu(){
     if (menuContent) menuContent.classList.remove('menu-content-open');
     if (menu) menu.classList.remove('menu-open');
     if (confirmBtn) confirmBtn.classList.remove('showBtn');
+    document.querySelector('#small-confirm-btn').classList.remove('showBtn');
 }
 
 document.querySelector('.nav-toggle').addEventListener('click', () => {
@@ -276,6 +277,7 @@ document.querySelector('.nav-toggle').addEventListener('click', () => {
     document.querySelector('.menu-content').classList.toggle('menu-content-open');
     document.querySelector('.menu').classList.toggle('menu-open');
     document.querySelector('#confirm-btn').classList.toggle('showBtn');
+    document.querySelector('#small-confirm-btn').classList.toggle('showBtn');
 });
 
 window.openThemes = function(){
@@ -294,6 +296,8 @@ window.backToSettings = function(){
     setTimeout(()=>{
         document.querySelector('#back').style.display = 'none';
     }, 300);
-
-
 }
+
+//Themes Script
+
+

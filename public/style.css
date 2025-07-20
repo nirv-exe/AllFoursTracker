@@ -9,10 +9,13 @@
     --background-color: #4d4d4d;
 }
 
-.testTheme{
-    --t1-baseColor: #ff66ff;
-    --t2-baseColor: #a64dff;
-    --background-color: #5353c6;
+
+#single-themes #color1{
+    background-color: #0033cc;
+}
+
+#single-themes #color2{
+    background-color: #cc0000;
 }
 
 @keyframes mainAnim {
@@ -479,7 +482,27 @@ input#check, input#check-game{
     cursor: pointer;
 }
 
-#confirm-btn.showBtn{
+#small-confirm-btn{
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    font-family: "Lexend", sans-serif;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 2.5em;
+    height: 2.5em;
+    background-color: hsl(from var(--background-color) h s calc(l + 15));
+    color: white;
+    border: none;
+    cursor: pointer;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.25s ease-in-out, filter 0.25s ease;
+    filter: blur(10px);
+}
+
+#confirm-btn.showBtn, #small-confirm-btn.showBtn{
     transform: translateY(0);
     opacity: 1;
     filter: none;
@@ -501,6 +524,7 @@ input#check, input#check-game{
     border-radius: 10px;
     background-color: hsl(from var(--background-color) h s calc(l + 30) / 0.5);
     cursor: pointer;
+    z-index: 5;
 }
 
 .hbg-menu{
@@ -803,6 +827,18 @@ input#check, input#check-game{
     #button-container button{
         width: 3rem;
         height: 3rem;
+    }
+
+    .toggle-menu{
+        flex-direction: column;
+    }
+
+    #confirm-btn{
+        display: none;
+    }
+
+    #small-confirm-btn{
+        display: flex;
     }
 }
 
