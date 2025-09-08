@@ -71,33 +71,33 @@
               <section id="backgrounds">
                 <h2 class="themeTitle">Backgrounds</h2>
                 <div class="colorBtns">
-                  <button id="color1"></button>
-                  <button id="color2"></button>
-                  <button id="color3"></button>
-                  <button id="color4"></button>
-                  <button id="color5"></button>
+                  <button id="color1" onclick="changeTheme('color1', 'backgrounds')"></button>
+                  <button id="color2" onclick="changeTheme('color2', 'backgrounds')"></button>
+                  <button id="color3" onclick="changeTheme('color3', 'backgrounds')"></button>
+                  <button id="color4" onclick="changeTheme('color4', 'backgrounds')"></button>
+                  <button id="color5" onclick="changeTheme('color5', 'backgrounds')"></button>
                 </div>
               </section>
 
               <section id="presets">
                 <h2 class="themeTitle">Presets</h2>
                 <div class="colorBtns">
-                  <button id="color1"></button>
-                  <button id="color2"></button>
-                  <button id="color3"></button>
-                  <button id="color4"></button>
-                  <button id="color5"></button>
+                  <button id="color1" onclick="changeTheme('color1', 'presets')"></button>
+                  <button id="color2" onclick="changeTheme('color2', 'presets')"></button>
+                  <button id="color3" onclick="changeTheme('color3', 'presets')"></button>
+                  <button id="color4" onclick="changeTheme('color4', 'presets')"></button>
+                  <button id="color5" onclick="changeTheme('color5', 'presets')"></button>
                 </div>
               </section>
 
               <section id="single-themes">
                 <h2 class="themeTitle">Custom</h2>
                 <div class="colorBtns">
-                  <button id="color1"></button>
-                  <button id="color2"></button>
-                  <button id="color3"></button>
-                  <button id="color4"></button>
-                  <button id="color5"></button>
+                  <button id="color1" onclick="changeTheme('color1', 'custom')"></button>
+                  <button id="color2" onclick="changeTheme('color2', 'custom')"></button>
+                  <button id="color3" onclick="changeTheme('color3', 'custom')"></button>
+                  <button id="color4" onclick="changeTheme('color4', 'custom')"></button>
+                  <button id="color5" onclick="changeTheme('color5', 'custom')"></button>
                 </div>
               </section>
             </div>
@@ -309,21 +309,27 @@
       </div>
     </div>
 
-    <!-- <div id="settingsModal" class="auth-modal">
-      <div id="settings" class="modal-content">
-        <h1>Settings</h1>
+    <div id="themeModal" class="auth-modal">
+      <div id="teamTheme" class="modal-content">
+        <h1>Choose Team</h1>
         <div class="container">
-          <h3>Score count at top</h3>
-          <input type="checkbox" id="check" />
-          <label for="check" class="button"></label>
+          <h3>Team 1</h3>
+          <input type="radio" name="team" id="theme-checkT1" class="toggle-slider"/>
+          <label for="theme-checkT1" class="button"></label>        
+        </div>
+
+        <div class="container">
+          <h3>Team 2</h3>
+          <input type="radio" name="team" id="theme-checkT2" class="toggle-slider"/>
+          <label for="theme-checkT2" class="button"></label>
         </div>
 
         <div class="acc-buttons">
-          <button onclick="updateSettings()">Confirm</button>
-          <button onclick="closeModal('settingsModal')">Cancel</button>
+          <button id="confirm-theme">Confirm</button>
+          <button onclick="closeModal('themeModal')">Cancel</button>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>

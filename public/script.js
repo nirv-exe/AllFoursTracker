@@ -160,20 +160,30 @@ window.addPoints = function(type, team, points) {
     updateButtonStates();
 };
 
-function checkWin(){
+function checkWin(){    
     if(team1Score === 14){
         showModal('victoryTeamModal');
+
         confetti({
             particleCount: 150,
             spread : 100,
             origin: {y: 0.5},
             zIndex: 1000
         })
+
         document.getElementById('win-team').textContent = `${team1Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
     } else if(team2Score === 14){
         showModal('victoryTeamModal',);
+
+        confetti({
+            particleCount: 150,
+            spread : 100,
+            origin: {y: 0.5},
+            zIndex: 1000
+        })
+
         document.getElementById('win-team').textContent = `${team2Name} Wins!`;
         document.getElementById('team1-scores').textContent = `${team1Name} - ${team1Score} points`;
         document.getElementById('team2-scores').textContent = `${team2Name} - ${team2Score} points`;
@@ -300,4 +310,49 @@ window.backToSettings = function(){
 
 //Themes Script
 
+function checkColor(id){
+    if(id == 'color1'){
+        return '#0033cc';
+    }
+
+    if(id == 'color2'){
+        return '#cc0000';
+    }
+}
+
+function checkToggle(id){
+    let team1Theme = document.querySelector('#theme-checkT1').checked;
+    let team2Theme = document.querySelector('#theme-checkT2').checked;
+
+    let color = checkColor(id);
+    const rootElement = document.documentElement;
+
+    console.log(id, color);
+
+    if (team1Theme){
+        rootElement.style.setProperty('--t1-baseColor', `${color}`);
+
+    } else if (team2Theme){
+        rootElement.style.setProperty('--t2-baseColor', `${color}`);
+    }
+
+    closeModal('themeModal');
+}
+
+function toggleReset(){
+    document.getElementById('theme-checkT1').checked = false;
+    document.getElementById('theme-checkT2').checked = false;
+}
+
+function changeTheme(id, type){
+    document.getElementById('themeModal').style.display = 'block';
+
+    document.getElementById('confirm-theme').addEventListener('click', ()=>{
+        checkToggle(id);
+    })
+
+    toggleReset();
+}
+
+console.log(document.querySelector('#team-2.player-card').classList);
 
