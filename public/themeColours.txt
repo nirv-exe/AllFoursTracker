@@ -1,0 +1,11 @@
+colour3 = #cc66ff
+colour4 = #ffccff
+color5 =  #4ddbff
+
+
+Background Colors:
+default: #4d4d4d
+color2: #333333;
+color3: #99d6ff
+color4: #990000
+color5: #ffccff

@@ -308,6 +308,26 @@ window.backToSettings = function(){
     }, 300);
 }
 
+function showPopup(message) {
+    const popup = document.getElementById('popup');
+    popup.textContent = message;
+    popup.classList.add('show');
+
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 3000); // Hide after 3 seconds
+}
+
+function showErrorPopup(message) {
+    const popup = document.getElementById('popup-error');
+    popup.textContent = message;
+    popup.classList.add('show');
+
+    setTimeout(() => {
+        popup.classList.remove('show');
+    }, 3000); // Hide after 3 seconds
+}
+
 //Themes Script
 
 function checkColor(id){
@@ -318,22 +338,100 @@ function checkColor(id){
     if(id == 'color2'){
         return '#cc0000';
     }
+
+    if(id == 'color3'){
+        return '#cc66ff';
+    }
+
+    
+    if(id == 'color4'){
+        return '#ffccff';
+    }
+
+    
+    if(id == 'color5'){
+        return '#4ddbff';
+    }
 }
 
-function checkToggle(id){
-    let team1Theme = document.querySelector('#theme-checkT1').checked;
-    let team2Theme = document.querySelector('#theme-checkT2').checked;
+function checkBGColor(id){
+    if(id == 'color1'){
+        return '#4d4d4d';
+    }
+
+    if(id == 'color2'){
+        return '#99d6ff';
+    }
+
+    if(id == 'color3'){
+        return '#990000';
+    }
+    
+    if(id == 'color4'){
+        return '#333333';
+    }
+
+    if(id == 'color5'){
+        return '#ffccff';
+    }
+}
+
+function checkTheme(team, color){
+    const rootElement = document.documentElement;
+    const computedStyle = getComputedStyle(rootElement);
+
+    console.log("Color from function: ", color);
+
+    if (team == 1){
+        const theme_color = computedStyle.getPropertyValue('--t1-baseColor').trim();
+
+        // console.log("Var Color: ", theme_color, "Color: ", color);
+
+        if (color == theme_color){
+            showErrorPopup("Team 1 already has that Theme");
+            toggleReset();
+            return true;
+        }else {
+            return false;
+        };
+    }
+    else 
+    if (team == 2){
+        const theme_color = computedStyle.getPropertyValue('--t2-baseColor').trim();
+
+        // console.log("Var Color: ", theme_color, "Color: ", color);
+
+        if (color == theme_color){
+            showErrorPopup("Team 2 already has that Theme");
+            toggleReset();
+            return true;
+        } else{
+            return false;
+        }
+    }
+}
+
+function checkToggle(id, type){
+    let team1Theme = (type == "team1");
+    let team2Theme = (type == "team2");
 
     let color = checkColor(id);
     const rootElement = document.documentElement;
 
-    console.log(id, color);
-
+    console.log("Color from function: ", color);
     if (team1Theme){
+        if (checkTheme(1,color)){
+            return;
+        }
         rootElement.style.setProperty('--t1-baseColor', `${color}`);
+        showPopup("Theme Successfully Set!");
 
     } else if (team2Theme){
+        if(checkTheme(2, color)){
+            return;
+        }
         rootElement.style.setProperty('--t2-baseColor', `${color}`);
+        showPopup("Theme Successfully Set!");
     }
 
     closeModal('themeModal');
@@ -344,15 +442,54 @@ function toggleReset(){
     document.getElementById('theme-checkT2').checked = false;
 }
 
-function changeTheme(id, type){
-    document.getElementById('themeModal').style.display = 'block';
+function resetTheme(){
+    const rootElement = document.documentElement;
+}
 
-    document.getElementById('confirm-theme').addEventListener('click', ()=>{
-        checkToggle(id);
-    })
+function changeTheme(id, type){
+
+    if (type == 'backgrounds'){
+        const color = checkBGColor(id);
+        const rootElement = document.documentElement;
+        const computedStyle = getComputedStyle(rootElement);
+        const theme_color = computedStyle.getPropertyValue('--background-color').trim();
+
+        if (color == theme_color){
+            showErrorPopup("Background already has this theme");
+            return;
+        }
+        else{
+            rootElement.style.setProperty('--background-color', `${color}`);
+            showPopup("Background theme successfully set!");
+        }
+
+        getContrastColor(color);
+    }
+    else if (type == "team1" || type == "team2"){
+        checkToggle(id, type);
+    }
 
     toggleReset();
 }
+
+// Convert hex color (#rrggbb) → readable text color (black/white)
+function getContrastColor(hex) {
+  // strip leading #
+  hex = hex.replace('#', '');
+  const rootElement = document.documentElement.style;
+
+  // parse r, g, b
+  let r = parseInt(hex.substr(0,2),16);
+  let g = parseInt(hex.substr(2,2),16);
+  let b = parseInt(hex.substr(4,2),16);
+
+  // relative luminance (perceived brightness)
+  let luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+
+  // if bright → return black text, else white text
+  luminance > 0.5 ? rootElement.setProperty('--font-colorMain','#000000') : rootElement.setProperty('--font-colorMain','#ffffff') ;
+}
+
 
 console.log(document.querySelector('#team-2.player-card').classList);
 

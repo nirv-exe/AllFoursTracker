@@ -64,42 +64,55 @@
               </button>
             </div>
           </div>
-
+          
           <div class="themes-menu">
             <h2 class="themeTitle" id="themeMenuTitle">Themes</h2>
-            <div class="theme-sections">
-              <section id="backgrounds">
-                <h2 class="themeTitle">Backgrounds</h2>
-                <div class="colorBtns">
-                  <button id="color1" onclick="changeTheme('color1', 'backgrounds')"></button>
-                  <button id="color2" onclick="changeTheme('color2', 'backgrounds')"></button>
-                  <button id="color3" onclick="changeTheme('color3', 'backgrounds')"></button>
-                  <button id="color4" onclick="changeTheme('color4', 'backgrounds')"></button>
-                  <button id="color5" onclick="changeTheme('color5', 'backgrounds')"></button>
-                </div>
-              </section>
-
-              <section id="presets">
-                <h2 class="themeTitle">Presets</h2>
-                <div class="colorBtns">
-                  <button id="color1" onclick="changeTheme('color1', 'presets')"></button>
-                  <button id="color2" onclick="changeTheme('color2', 'presets')"></button>
-                  <button id="color3" onclick="changeTheme('color3', 'presets')"></button>
-                  <button id="color4" onclick="changeTheme('color4', 'presets')"></button>
-                  <button id="color5" onclick="changeTheme('color5', 'presets')"></button>
-                </div>
-              </section>
-
+            <div class="theme-container">
               <section id="single-themes">
-                <h2 class="themeTitle">Custom</h2>
-                <div class="colorBtns">
-                  <button id="color1" onclick="changeTheme('color1', 'custom')"></button>
-                  <button id="color2" onclick="changeTheme('color2', 'custom')"></button>
-                  <button id="color3" onclick="changeTheme('color3', 'custom')"></button>
-                  <button id="color4" onclick="changeTheme('color4', 'custom')"></button>
-                  <button id="color5" onclick="changeTheme('color5', 'custom')"></button>
+                <h2 class="themeTitle custom">Custom</h2>
+                <div class="colorBtns team-1-themes custom">
+                  <h2 class="t1-theme section-title">Team 1</h2>
+                  <button id="color1" onclick="changeTheme('color1', 'team1')"></button>
+                  <button id="color2" onclick="changeTheme('color2', 'team1')"></button>
+                  <button id="color3" onclick="changeTheme('color3', 'team1')"></button>
+                  <button id="color4" onclick="changeTheme('color4', 'team1')"></button>
+                  <button id="color5" onclick="changeTheme('color5', 'team1')"></button>
+                </div>
+                <div class="colorBtns team-2-themes custom">
+                  <h2 class="t2-theme section-title">Team 2</h2>
+                  <button id="color1" onclick="changeTheme('color1', 'team2')"></button>
+                  <button id="color2" onclick="changeTheme('color2', 'team2')"></button>
+                  <button id="color3" onclick="changeTheme('color3', 'team2')"></button>
+                  <button id="color4" onclick="changeTheme('color4', 'team2')"></button>
+                  <button id="color5" onclick="changeTheme('color5', 'team2')"></button>
                 </div>
               </section>
+              
+              <div class="theme-sections">
+                <section id="backgrounds">
+                  <div class="preset-themes">
+                    <h2 class="themeTitle">Backgrounds</h2>
+                    <div class="colorBtns">
+                      <button id="color1" onclick="changeTheme('color1', 'backgrounds')"></button>
+                      <button id="color2" onclick="changeTheme('color2', 'backgrounds')"></button>
+                      <button id="color3" onclick="changeTheme('color3', 'backgrounds')"></button>
+                      <button id="color4" onclick="changeTheme('color4', 'backgrounds')"></button>
+                      <button id="color5" onclick="changeTheme('color5', 'backgrounds')"></button>
+                    </div>
+                  </section>
+                  <section id="presets">
+                    <h2 class="themeTitle">Presets</h2>
+                    <div class="colorBtns">
+                      <button id="color1" onclick="changeTheme('color1', 'presets')"></button>
+                      <button id="color2" onclick="changeTheme('color2', 'presets')"></button>
+                      <button id="color3" onclick="changeTheme('color3', 'presets')"></button>
+                      <button id="color4" onclick="changeTheme('color4', 'presets')"></button>
+                      <button id="color5" onclick="changeTheme('color5', 'presets')"></button>
+                    </div>
+                  </section>
+            </div>
+              </div>
+
             </div>
 
           </div>
@@ -330,6 +343,9 @@
         </div>
       </div>
     </div>
+
+    <div id="popup" class="popup"></div>
+    <div id="popup-error" class="popup-error"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="script.js"></script>

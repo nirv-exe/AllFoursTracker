@@ -7,8 +7,11 @@
     --t1-baseColor: #0033cc;
     --t2-baseColor: #cc0000;
     --background-color: #4d4d4d;
+    --font-colorMain: #fff;
+    --font-colorAccent: #000;
 }
 
+/* Theme Button Presets */
 #single-themes #color1{
     background-color: #0033cc;
 }
@@ -16,6 +19,40 @@
 #single-themes #color2{
     background-color: #cc0000;
 }
+
+#single-themes #color3{
+    background-color: #cc66ff;
+}
+
+#single-themes #color4{
+    background-color: #ffccff;
+}
+
+#single-themes #color5{
+    background-color: #4ddbff;
+}
+
+/* BG Button Presets */
+#backgrounds #color1{
+    background-color: #4d4d4d;
+}
+
+#backgrounds #color2{
+    background-color: #99d6ff;
+}
+
+#backgrounds #color3{
+    background-color: #990000;
+}
+
+#backgrounds #color4{
+    background-color: #333333;
+}
+
+#backgrounds #color5{
+    background-color: #ffccff;
+}
+
 
 @keyframes mainAnim {
 	0% {
@@ -60,7 +97,7 @@ main{
 
 header h1{
     font-weight: 900;
-    color: white;
+    color: var(--font-colorMain);
     cursor: pointer;
     animation: mainAnim 0.5s ease 0s 1 normal forwards;
 }
@@ -68,7 +105,7 @@ header h1{
 .initButtons{
     font-family: "Lexend", sans-serif;
     font-size: 1em;
-    background-color: #999999;
+    background-color: hsl(from var(--background-color) h s calc(l + 20));
     color: white;
     border: none;
     padding: 1em;
@@ -234,6 +271,33 @@ svg{
     font-size: 0.65em;
 }
 
+.popup, .popup-error{
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background-color: #4BB543;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 1em;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+}
+
+.popup-error{
+    background-color: #ff1a1a;
+}
+
+.popup.show, .popup-error.show{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
 .auth-modal {
     display: none;
     position: fixed;
@@ -359,7 +423,7 @@ svg{
 #points{
     color: white;
     display: none;
-    background-color: #999999;
+    background-color: hsl(from var(--background-color) h s calc(l + 20));
     padding: 5px 25px 5px 25px;
     border-radius: 15px;
 }
@@ -375,11 +439,11 @@ a{
 }
 
 #t1-score{
-    color:#0066ff;
+    color:var(--t1-baseColor);
 }
 
 #t2-score{
-    color:#cc0000;
+    color:var(--t2-baseColor);
 }
 
 .container{
@@ -710,13 +774,69 @@ input#check, input#check-game, input.toggle-slider{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 0px;
+    gap: 1rem;
     position: absolute;
     width: 100vw;
     height: 50vh;
     transform: translateX(100vw);
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.theme-container{
+    display: grid;
+    gap: 1rem;
+    max-height: 90vh;
+    min-width: 50vw;
+    /* place-items: center; */
+}
+
+#single-themes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    background-color: hsl(from var(--background-color) h s calc(l + 20) / 0.6);
+}
+
+.section-title{
+    text-align: center;
+    grid-column: span 2;
+    color: var(--font-colorMain);
+}
+
+.custom.colorBtns{
+    display: grid;
+    grid-template-columns: 25% 25%;
+    place-items: center;
+    place-content: center;
+    background-color: hsl(from var(--background-color) h s l / 0.3);
+}
+
+.custom.colorBtns button{
+    margin-bottom: 0.75rem;
+}
+
+.colorBtns button{
+    outline: 0px solid black;
+    outline-offset: -1px;
+}
+
+.colorBtns button:hover{
+    outline-width: 3px;
+    outline-color: #000;
+    outline-offset: 0;
+    transition: outline 0.1s;
+}
+
+
+#single-themes .themeTitle{
+    grid-column: 1  / -1;
+}
+
+.team-1-themes, .team-2-themes{
+    border: 2px solid var(--font-colorMain);
+    border-radius: inherit;
+
 }
 
 .themes-menu.openThemes{
@@ -728,6 +848,11 @@ input#check, input#check-game, input.toggle-slider{
 .theme-sections{
     display: flex;
     gap: 1.5rem;
+    justify-content: center;
+}
+
+.theme-sections > *{
+    flex-grow: 1;
 }
 
 .themes-menu section{
@@ -757,6 +882,13 @@ input#check, input#check-game, input.toggle-slider{
     border-radius: 10px;
 }
 
+#backgrounds, #presets{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Media queries */
 
 @media (max-width: 920px){
@@ -778,6 +910,14 @@ input#check, input#check-game, input.toggle-slider{
 @media (max-width: 800px){
     .theme-sections{
         flex-direction: column;
+    }
+
+    #themeMenuTitle{  
+        margin-top: 10rem;
+    }
+
+    #single-themes{
+        grid-template-columns: 1fr;
     }
 }
 
