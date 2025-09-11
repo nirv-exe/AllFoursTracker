@@ -617,11 +617,16 @@ function setPreset(id){
         document.querySelector(`#presets .current-theme`).classList.remove('current-theme');
     }
 
+    let team1lumin = getContrastColor(team1Color);
+    let team2lumin = getContrastColor(team2Color);
+
+
     document.querySelector(`#presets #${id}`).classList.add('current-theme');
     root.setProperty('--t1-baseColor', team1Color);
     root.setProperty('--t2-baseColor', team2Color);
     root.setProperty('--background-color', team1Color);
-    setContrastColor(team1Color);
+    team1lumin > team2lumin ? setContrastColor(team1Color): 
+    team2lumin > team1lumin ? setContrastColor(team2Color): setContrastColor(team1Color);
     document.querySelector('body').style.backgroundImage = backgroundColor;
     showPopup("Theme Successfully set!");
 }
