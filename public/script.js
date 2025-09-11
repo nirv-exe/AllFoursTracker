@@ -113,6 +113,7 @@ function updateSettings(){
         leftClick();
     }
 
+    backToSettings();
     closeMenu();
 }
 
@@ -244,22 +245,32 @@ window.editName = function(){
 
 let btn = document.getElementById('btn')
 
+const rootElement = document.documentElement;
+const computedStyle = getComputedStyle(rootElement);
 
 function leftClick() {
 	btn.style.left = '0';
-    document.getElementById('right-btn').style.color = 'black';
-    document.getElementById('left-btn').style.color = 'white';
+
+    const bgColor = computedStyle.getPropertyValue('--background-color').trim();
+    console.log(bgColor);
+
+    document.getElementById('right-btn').style.color = "black";
+    document.getElementById('left-btn').style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
     game = 1;
 }
 
 function rightClick() {
-	btn.style.left = '162.5px';
-    document.getElementById('left-btn').style.color = 'black';
-    document.getElementById('right-btn').style.color = 'white';
+	btn.style.left = '162.5px'; 
+
+    const bgColor = computedStyle.getPropertyValue('--background-color').trim();
+    console.log(bgColor);
+    
+    document.getElementById('left-btn').style.color = "black"
+    document.getElementById('right-btn').style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
     game = 2;
 }
 
-function toggle(){
+function toggle(){  
     const showTotal = document.getElementById('check').checked;
 
    if (showTotal){
@@ -283,6 +294,7 @@ function closeMenu(){
 }
 
 document.querySelector('.nav-toggle').addEventListener('click', () => {
+    backToSettings();
     document.querySelector('.toggle-menu').classList.toggle('menu-open');
     document.querySelector('.menu-content').classList.toggle('menu-content-open');
     document.querySelector('.menu').classList.toggle('menu-open');
@@ -364,11 +376,11 @@ function checkBGColor(id){
     }
 
     if(id == 'color3'){
-        return '#990000';
+        return '#c44dff';
     }
     
     if(id == 'color4'){
-        return '#333333';
+        return '#336699';
     }
 
     if(id == 'color5'){
@@ -418,22 +430,32 @@ function checkToggle(id, type){
     let color = checkColor(id);
     const rootElement = document.documentElement;
 
+    console.log(document.querySelector(`.team-1-themes #${id}`));
+
     console.log("Color from function: ", color);
     if (team1Theme){
         if (checkTheme(1,color)){
             return;
         }
+
+        document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
         rootElement.style.setProperty('--t1-baseColor', `${color}`);
         showPopup("Theme Successfully Set!");
 
+        document.querySelector(`.team-1-themes #${id}`).classList.add("current-theme");
     } else if (team2Theme){
         if(checkTheme(2, color)){
             return;
         }
+
+        document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
         rootElement.style.setProperty('--t2-baseColor', `${color}`);
         showPopup("Theme Successfully Set!");
+
+        document.querySelector(`.team-2-themes #${id}`).classList.add("current-theme");
     }
 
+    document.querySelector('.player-card').style.color = getContrastColor(color);
     closeModal('themeModal');
 }
 
@@ -442,8 +464,25 @@ function toggleReset(){
     document.getElementById('theme-checkT2').checked = false;
 }
 
-function resetTheme(){
+function resetThemes(){
     const rootElement = document.documentElement;
+
+    document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
+    document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
+    document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
+
+    document.querySelector(`#backgrounds #color1`).classList.add('current-theme');
+    document.querySelector(`.team-1-themes #color1`).classList.add("current-theme");
+    document.querySelector(`.team-2-themes #color2`).classList.add("current-theme");
+
+
+    
+    document.querySelector('.player-card').style.color = '#fff';
+    rootElement.style.setProperty('--background-color', `${checkBGColor('color1')}`);
+    rootElement.style.setProperty('--t1-baseColor', `${checkColor('color1')}`);
+    rootElement.style.setProperty('--t2-baseColor', `${checkColor('color2')}`);
+
+    setContrastColor(checkBGColor('color1'));
 }
 
 function changeTheme(id, type){
@@ -459,11 +498,13 @@ function changeTheme(id, type){
             return;
         }
         else{
+            document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
             rootElement.style.setProperty('--background-color', `${color}`);
+            document.querySelector(`#backgrounds #${id}`).classList.add('current-theme');
             showPopup("Background theme successfully set!");
         }
 
-        getContrastColor(color);
+        setContrastColor(color);
     }
     else if (type == "team1" || type == "team2"){
         checkToggle(id, type);
@@ -473,7 +514,7 @@ function changeTheme(id, type){
 }
 
 // Convert hex color (#rrggbb) → readable text color (black/white)
-function getContrastColor(hex) {
+function setContrastColor(hex) {
   // strip leading #
   hex = hex.replace('#', '');
   const rootElement = document.documentElement.style;
@@ -488,6 +529,23 @@ function getContrastColor(hex) {
 
   // if bright → return black text, else white text
   luminance > 0.5 ? rootElement.setProperty('--font-colorMain','#000000') : rootElement.setProperty('--font-colorMain','#ffffff') ;
+}
+
+function getContrastColor(hex) {
+  // strip leading #
+  hex = hex.replace('#', '');
+  const rootElement = document.documentElement.style;
+
+  // parse r, g, b
+  let r = parseInt(hex.substr(0,2),16);
+  let g = parseInt(hex.substr(2,2),16);
+  let b = parseInt(hex.substr(4,2),16);
+
+  // relative luminance (perceived brightness)
+  let luminance = (0.299*r + 0.587*g + 0.114*b) / 255;
+
+  // if bright → return black text, else white text
+  return luminance > 0.5 ? '#000' : '#fff' ;
 }
 
 

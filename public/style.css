@@ -42,18 +42,43 @@
 }
 
 #backgrounds #color3{
-    background-color: #990000;
+    background-color: #c44dff;
 }
 
 #backgrounds #color4{
-    background-color: #333333;
+    background-color: #336699;
 }
 
 #backgrounds #color5{
     background-color: #ffccff;
 }
 
+/* Preset Theme Packs */
+#presets #color1{
+    background-image: 
+    linear-gradient(to right, #99bbff 50%, #ffcccc 50%);
+}
 
+#presets #color2{
+    background-image: 
+    linear-gradient(to right, #ccff99 50%, #9494b8 50%);
+}
+
+#presets #color3{
+    background-image: 
+    linear-gradient(to right, #ff99cc 50%, #b3ecff 50%);
+}
+
+#presets #color4{
+    background-image: 
+    linear-gradient(to right, #ffbf80 50%, #d279d2 50%);
+}
+
+#presets #color5{
+    background-image: 
+    linear-gradient(to right, #336699 50%, #7300e6 50%);
+}
+/* Main CSS */
 @keyframes mainAnim {
 	0% {
 		opacity: 0;
@@ -106,7 +131,7 @@ header h1{
     font-family: "Lexend", sans-serif;
     font-size: 1em;
     background-color: hsl(from var(--background-color) h s calc(l + 20));
-    color: white;
+    color: var(--font-colorMain);
     border: none;
     padding: 1em;
     border-radius: 15px;
@@ -162,7 +187,7 @@ header h1{
 
 .player-card{
     background-color: #d9d9d9;
-    color: white;
+    color: var(--font-colorMain);
     border-radius: 15px;
     width: 90vw;
     max-width: 355px;
@@ -415,7 +440,8 @@ svg{
 	position: absolute;
 	width: 50%;
 	height: 100%;
-	background: #0066ff;
+	background: 
+        hsl(from var(--background-color) h s calc(l - 5));
 	border-radius: 30px;
 	transition: .5s;
 }
@@ -473,6 +499,7 @@ a{
 .container h3{
     position: absolute;
     left: 0;
+    color: var(--font-colorMain);
 }
 
 .gameCheck{
@@ -537,7 +564,7 @@ input#check, input#check-game, input.toggle-slider{
     width: 10em;
     height: 2.5em;
     background-color: hsl(from var(--background-color) h s calc(l + 15));
-    color: white;
+    color: var(--font-colorMain);
     border: none;
     transform: translateY(-100%);
     opacity: 0;
@@ -572,9 +599,18 @@ input#check, input#check-game, input.toggle-slider{
     filter: none;
 }
 
-#confirm-settings{
+#confirm-btn > svg{
     margin: 0;
     padding: 0;
+    stroke: white;
+    fill: white;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+#confirm-btn > svg > *{
+    stroke: white;
+    fill: white;
 }
 
 .nav-toggle{
@@ -602,7 +638,7 @@ input#check, input#check-game, input.toggle-slider{
     width: 2em;
     border-radius: 10px;
     height: 3px;
-    background-color: #d9d9d9;
+    background-color: var(--font-colorMain);
     transition: transform 0.25s ease;
     left: 6.5px;
 }
@@ -704,8 +740,8 @@ input#check, input#check-game, input.toggle-slider{
 
 #button-container button{
     margin-top: 1.5rem;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     background-color: hsl(from var(--background-color) h s calc(l + 15) / 0.7);
     border: 1.5px #3335 solid;
     border-radius: 5px;
@@ -733,14 +769,23 @@ input#check, input#check-game, input.toggle-slider{
 
 #back svg{
     margin: 0;
-    width: 20px;
-    height: 20px;
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--font-colorMain);
+    stroke: var(--font-colorMain);
+}
+
+#themes{
+    width: 5rem;
+    aspect-ratio: 1;
 }
 
 #themes svg{
     margin: 0;
     height: 3rem;
     width: 3rem;
+    stroke: var(--font-colorMain);
+    fill: #fff;
 }
 
 #themes:hover{
@@ -769,6 +814,10 @@ input#check, input#check-game, input.toggle-slider{
     opacity: 0;
 }
 
+#backgrounds, #presets{
+    background-color: hsl(from var(--background-color) h s calc(l + 20) / 0.6);
+}
+
 .themes-menu{
     display: flex;
     justify-content: center;
@@ -786,8 +835,8 @@ input#check, input#check-game, input.toggle-slider{
 .theme-container{
     display: grid;
     gap: 1rem;
-    max-height: 90vh;
-    min-width: 50vw;
+    max-height: 90dvh;
+    min-width: 50dvw;
     /* place-items: center; */
 }
 
@@ -800,7 +849,7 @@ input#check, input#check-game, input.toggle-slider{
 
 .section-title{
     text-align: center;
-    grid-column: span 2;
+    grid-column: 1 / -1;
     color: var(--font-colorMain);
 }
 
@@ -864,13 +913,16 @@ input#check, input#check-game, input.toggle-slider{
 
 .themeTitle{
     text-align: center;
-    color: #fff;
+    color: var(--font-colorMain);
     margin: 0;
     padding: 10px;
 }
 
 #themeMenuTitle{
     font-size: 2rem;
+    background-color: hsl(from var(--background-color) h s calc(l + 20) / 0.6);
+    border: 2px solid #fff;
+    border-radius: 0.3rem;
 }
 
 .themes-menu section button{
@@ -880,6 +932,56 @@ input#check, input#check-game, input.toggle-slider{
     background-color: hsl(from var(--background-color) h s calc(l + 15));
     border: none;
     border-radius: 10px;
+    position: relative;
+}
+
+.themes-menu section button::after{
+    content: url('/public/images/checkmark.svg');
+    position: absolute;
+    background-color: hsl(from #000 h s l / 0.3);
+    width: 100%;
+    max-height: calc(100% - 1rem);
+    aspect-ratio: 1;
+    display: none;
+    inset: 0;
+    border-radius: inherit;
+    padding-top: 1rem;
+}
+
+.themes-menu .current-theme::after{
+    display: block;
+}
+
+.theme-menu-header{
+    width: 50%;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+}
+
+.reset-themes{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    width: 3rem;
+    height: 2.5rem;
+    background-color: hsl(from var(--background-color) h s calc(l + 15));
+    color: white;
+    border: none;
+    padding: 0;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.reset-themes:hover{
+    background-color: hsl(from var(--background-color) h s calc(l + 5));
+}
+
+.reset-themes svg{
+    margin: 0;
+    padding: 0;
+    fill: var(--font-colorMain);
 }
 
 #backgrounds, #presets{
@@ -905,6 +1007,11 @@ input#check, input#check-game, input.toggle-slider{
         width: 2.5rem;
         height: 2.5rem;
     }
+
+    .themes-menu section button::after{
+        max-height: calc(100% - 0.75rem);
+        padding-top: 0.75rem;
+    }
 }
 
 @media (max-width: 800px){
@@ -912,12 +1019,22 @@ input#check, input#check-game, input.toggle-slider{
         flex-direction: column;
     }
 
+    .theme-container{
+        min-height: 90vh;
+    }
+
     #themeMenuTitle{  
-        margin-top: 10rem;
+        margin-top: 0rem;
     }
 
     #single-themes{
         grid-template-columns: 1fr;
+        padding: 15px 5px 5px ;
+    }
+
+    .custom.colorBtns{
+        grid-template-columns: repeat(5, 1fr);
+        /* gap: 0.5rem; */
     }
 }
 
