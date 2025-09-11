@@ -470,10 +470,15 @@ function toggleReset(){
 
 function resetThemes(){
     const rootElement = document.documentElement;
+    const setThemes = document.querySelectorAll(`#presets .current-theme`);
+
 
     document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
     document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
     document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
+    if(setThemes.length > 0){
+        document.querySelector(`#presets .current-theme`).classList.remove('current-theme');
+    }
 
     document.querySelector(`#backgrounds #color1`).classList.add('current-theme');
     document.querySelector(`.team-1-themes #color1`).classList.add("current-theme");
