@@ -557,39 +557,72 @@ function setPreset(id){
     let team1Color = '#0033cc';
     let team2Color = '#cc0000';
     let backgroundColor = '#4d4d4d';
-
+    const rootElement = document.documentElement;
+    const computedStyle = getComputedStyle(rootElement);
+    const checkTeam = computedStyle.getPropertyValue('--t1-baseColor');
+    const setThemes = document.querySelectorAll(`#presets .current-theme`);
     const root = document.documentElement.style;
     
     if(id == 'color1'){
         team1Color = '#99bbff';
         team2Color = '#ffcccc';
         backgroundColor = `repeating-radial-gradient(${team1Color}, ${team2Color})`;
+        if(team1Color == checkTeam){
+            showErrorPopup('Theme Already Set!');
+            return;
+        }
     }
     else if(id == 'color2'){
         team1Color = '#ccff99';
         team2Color = '#9494b8';
         backgroundColor = `repeating-radial-gradient(${team1Color}, ${team2Color})`;
+
+        if(team1Color == checkTeam){
+            showErrorPopup('Theme Already Set!');
+            return;
+        }
     }
     else if(id == 'color3'){
         team1Color = '#ff99cc';
         team2Color = '#b3ecff';
         backgroundColor = `repeating-radial-gradient(${team1Color}, ${team2Color})`;
+
+        if(team1Color == checkTeam){
+            showErrorPopup('Theme Already Set!');
+            return;
+        }
     }
     else if(id == 'color4'){
         team1Color = '#ffbf80';
         team2Color = '#d279d2';
         backgroundColor = `repeating-radial-gradient(${team1Color}, ${team2Color})`;
+
+        if(team1Color == checkTeam){
+            showErrorPopup('Theme Already Set!');
+            return;
+        }
     }
     else if (id == 'color5'){
         team1Color = '#336699';
         team2Color = '#7300e6';
         backgroundColor = `repeating-radial-gradient(${team1Color}, ${team2Color})`;
+
+        if(team1Color == checkTeam){
+            showErrorPopup('Theme Already Set!');
+            return;
+        }
     }
 
+    if(setThemes.length > 0){
+        document.querySelector(`#presets .current-theme`).classList.remove('current-theme');
+    }
+
+    document.querySelector(`#presets #${id}`).classList.add('current-theme');
     root.setProperty('--t1-baseColor', team1Color);
     root.setProperty('--t2-baseColor', team2Color);
     root.setProperty('--background-color', team1Color);
     setContrastColor(team1Color);
     document.querySelector('body').style.backgroundImage = backgroundColor;
+    showPopup("Theme Successfully set!");
 }
 
