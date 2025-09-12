@@ -941,7 +941,7 @@ input#check, input#check-game, input.toggle-slider{
 }
 
 .themes-menu section button::after{
-    content: url('/images/checkmark.svg');
+    content: url('/public/images/checkmark.svg');
     position: absolute;
     background-color: hsl(from #000 h s l / 0.3);
     width: 100%;
