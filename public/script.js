@@ -438,10 +438,10 @@ function checkToggle(id, type){
             return;
         }
 
-        document.querySelector(`.team-1-themes .current-theme`) ? (id) => {
+        if (document.querySelector(`.team-1-themes .current-theme`)) {
             document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
-            document.querySelector(`.team-1-themes #${id}`).classList.add("current-theme");
-        } : document.querySelector(`.team-1-themes #${id}`).classList.add("current-theme");
+        }
+        document.querySelector(`.team-1-themes #${id}`).classList.add("current-theme");
         rootElement.style.setProperty('--t1-baseColor', `${color}`);
         showPopup("Theme Successfully Set!");
     } else if (team2Theme){
@@ -449,10 +449,10 @@ function checkToggle(id, type){
             return;
         }
 
-        document.querySelector(`.team-2-themes .current-theme`) ? (id) => {
+        if (document.querySelector(`.team-2-themes .current-theme`)) {
             document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
-            document.querySelector(`.team-2-themes #${id}`).classList.add("current-theme");
-        } : document.querySelector(`.team-2-themes #${id}`).classList.add("current-theme");
+        }
+        document.querySelector(`.team-2-themes #${id}`).classList.add("current-theme");
 
         rootElement.style.setProperty('--t2-baseColor', `${color}`);
         showPopup("Theme Successfully Set!");
@@ -473,10 +473,17 @@ function toggleReset(){
 function resetThemes(){
     const rootElement = document.documentElement;
 
+    if (document.querySelector(`.team-1-themes .current-theme`)) {
+        document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
+    }
 
-    document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
-    document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
-    document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
+    if (document.querySelector(`.team-2-themes .current-theme`)) {
+        document.querySelector(`.team-2-themes .current-theme`).classList.remove("current-theme");
+    }
+
+    if(document.querySelector(`#backgrounds .current-theme`)){
+        document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
+    }
 
     document.querySelector(`#backgrounds #color1`).classList.add('current-theme');
     document.querySelector(`.team-1-themes #color1`).classList.add("current-theme");
@@ -488,6 +495,7 @@ function resetThemes(){
     }
     
     document.querySelector('.player-card').style.color = '#fff';
+    document.querySelector('body').style.backgroundImage = '';
     rootElement.style.setProperty('--background-color', `${checkBGColor('color1')}`);
     rootElement.style.setProperty('--t1-baseColor', `${checkColor('color1')}`);
     rootElement.style.setProperty('--t2-baseColor', `${checkColor('color2')}`);
@@ -512,11 +520,11 @@ function changeTheme(id, type){
             return;
         }
         else{
-            document.querySelector(`#backgrounds .current-theme`) ? () =>{
-                document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');document.querySelector(`#backgrounds #${id}`).classList.add('current-theme');
-            } 
-            : document.querySelector(`#backgrounds #${id}`).classList.add('current-theme');
+            if(document.querySelector(`#backgrounds .current-theme`)){
+                document.querySelector(`#backgrounds .current-theme`).classList.remove('current-theme');
+            }        
             
+            document.querySelector(`#backgrounds #${id}`).classList.add('current-theme');    
             rootElement.style.setProperty('--background-color', `${color}`);    
             showPopup("Background theme successfully set!");
         }
