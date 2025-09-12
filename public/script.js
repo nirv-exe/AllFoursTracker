@@ -461,7 +461,14 @@ function checkToggle(id, type){
     let playerCards = document.querySelectorAll('.player-card');
 
     playerCards.forEach(card => {
-        card.style.color = getContrastColor(color);
+        if(type == "team1")
+        {
+            document.querySelector('#team-1.player-card').style.color = getContrastColor(color);
+        }
+        if(type == "team2")
+        {
+            document.querySelector('#team-2.player-card').style.color = getContrastColor(color);
+        }
     })
 }
 
@@ -472,6 +479,7 @@ function toggleReset(){
 
 function resetThemes(){
     const rootElement = document.documentElement;
+    const computedStyle = getComputedStyle(rootElement);
 
     if (document.querySelector(`.team-1-themes .current-theme`)) {
         document.querySelector(`.team-1-themes .current-theme`).classList.remove("current-theme");
@@ -500,7 +508,20 @@ function resetThemes(){
     rootElement.style.setProperty('--t1-baseColor', `${checkColor('color1')}`);
     rootElement.style.setProperty('--t2-baseColor', `${checkColor('color2')}`);
 
+    const team1Color = computedStyle.getPropertyValue('--t1-baseColor');
+    const team2Color = computedStyle.getPropertyValue('--t2-baseColor');
+    
     setContrastColor(checkBGColor('color1'));
+    let playerCards = document.querySelectorAll('.player-card');
+
+    playerCards.forEach(card => {
+        if(card.id == "team-1"){ 
+            card.style.color = getContrastColor(team1Color);
+        }
+        if(card.id == "team-2"){    
+            card.style.color = getContrastColor(team2Color);
+        }
+    })
 }
 
 function changeTheme(id, type){
