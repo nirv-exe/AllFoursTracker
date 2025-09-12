@@ -598,6 +598,10 @@ input#check, input#check-game, input.toggle-slider{
     padding: 0;
 }
 
+#small-confirm-btn > svg > path{
+    fill: var(--font-colorMain);
+}
+
 #confirm-btn.showBtn, #small-confirm-btn.showBtn{
     transform: translateY(0);
     opacity: 1;
