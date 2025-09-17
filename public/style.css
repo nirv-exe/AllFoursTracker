@@ -454,6 +454,9 @@ svg{
     background-color: hsl(from var(--background-color) h s calc(l + 20));
     padding: 5px 25px 5px 25px;
     border-radius: 15px;
+    animation: entranceAnim 1.05s ease-in-out 0s 1 normal forwards;
+    animation-timing-function: linear(0, -0.018 6.1%, -0.1 17.7%, -0.123 22.4%, -0.125 27.3%, -0.098 31.7%, -0.017 37%, 0.122 42%, 0.308 46.5%, 0.807 56.1%, 0.959 60.6%, 1.06 65.3%, 1.115 70.4%, 1.127 73.2%, 1.127 76.2%, 1.104 81.7%, 1.017 94.1%, 1);
+
 }
 
 #points h1{
@@ -948,7 +951,7 @@ input#check, input#check-game, input.toggle-slider{
 }
 
 .themes-menu section button::after{
-    content: url('/images/checkmark.svg');
+    content: url('/public/images/checkmark.svg');
     position: absolute;
     background-color: hsl(from #000 h s l / 0.3);
     width: 100%;
@@ -1089,6 +1092,7 @@ input#check, input#check-game, input.toggle-slider{
     }
 
     #points{
+        display: block !important;
         width: 17em;
         text-align: center;
     }
@@ -1128,6 +1132,19 @@ input#check, input#check-game, input.toggle-slider{
 
     #team-1, #team-2{
         margin: 15px;
+    }
+
+    #initGame{
+        padding-bottom: 10px;
+        padding-top: 5px;
+    }
+
+    h1{
+        margin-block: 15px;
+    }
+
+    #points{
+        margin-bottom: 15px;
     }
 }
 
