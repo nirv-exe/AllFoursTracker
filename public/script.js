@@ -12,12 +12,16 @@ let team2Score = 0;
 let team1Name = "Team 1";
 let team2Name = "Team 2";
 let game = 1;
+let gamePtsTeam1 = 0;
+let gamePtsTeam2 = 0;
 
 function initGame(){
     team1Score = 0;
     team2Score = 0;
     team1Name = "Team 1";
     team2Name = "Team 2";
+    gamePtsTeam1 = 0;
+    gamePtsTeam2 = 0;
     document.getElementById('team1-name').textContent = team1Name;
     document.getElementById('team2-name').textContent = team2Name;
     document.getElementById('team-1-score').textContent = "0";
@@ -44,6 +48,8 @@ function initGame(){
 function resetGame(){
     team1Score = 0;
     team2Score = 0;
+    gamePtsTeam1 = 0;
+    gamePtsTeam2 = 0;
     document.getElementById('team-1-score').textContent = "0";
     document.getElementById('team-2-score').textContent = "0";
     document.getElementById('points').style.display = 'none';
@@ -63,10 +69,10 @@ function resetGame(){
 }
 
 function updateScoreDisplay() {
-    document.getElementById('team-1-score').textContent = team1Score;
-    document.getElementById('t1-score').textContent = team1Score;
-    document.getElementById('team-2-score').textContent = team2Score;
-    document.getElementById('t2-score').textContent = team2Score;
+    document.getElementById('team-1-score').textContent = team1Score <= 14 ? team1Score : 14;
+    document.getElementById('t1-score').textContent = team1Score <= 14 ? team1Score : 14;
+    document.getElementById('team-2-score').textContent = team2Score <= 14 ? team2Score : 14;
+    document.getElementById('t2-score').textContent = team2Score <= 14 ? team2Score : 14;
 }
 
 function updateButtonStates() {
@@ -147,15 +153,22 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addPoints = function(type, team, points) {
     console.log(points, type);
 
-    if (type === 'game')
+    if (type === 'game'){
+        if(team === 1){
+            gamePtsTeam1++;
+        } else if (team === 2){
+            gamePtsTeam2++;
+        }
+
         points = game;
+    }
 
     if (team == 1)
         changeTeam1Score(points);
     else if (team == 2)
         changeTeam2Score(points);
 
-    checkWin(team);
+    checkWin();
     updateScoreDisplay();
     updateSettings();
     updateButtonStates();
@@ -248,7 +261,31 @@ let btn = document.getElementById('btn')
 const rootElement = document.documentElement;
 const computedStyle = getComputedStyle(rootElement);
 
+function reCountScore(newGameValue){
+    // Determine what the point value WAS so we can subtract it correctly
+    // If we are switching TO 1, points WERE 2. If switching TO 2, points WERE 1.
+    let oldGameValue = (newGameValue === 1) ? 2 : 1;
+
+    // Remove the OLD game points from the current score
+    let team1Clean = team1Score - (gamePtsTeam1 * oldGameValue);
+    let team2Clean = team2Score - (gamePtsTeam2 * oldGameValue);
+
+    // Add the NEW game points
+    team1Score = team1Clean + (gamePtsTeam1 * newGameValue);
+    team2Score = team2Clean + (gamePtsTeam2 * newGameValue);
+
+    // Clamp scores to max 14 (optional, but good practice)
+    if(team1Score > 14) team1Score = 14;
+    if(team2Score > 14) team2Score = 14;
+
+    checkWin();
+    updateScoreDisplay();
+}
+
 function leftClick() {
+    if(game === 2){
+        reCountScore(1);
+    }
 	btn.style.left = '0';
 
     const bgColor = computedStyle.getPropertyValue('--background-color').trim();
@@ -256,10 +293,16 @@ function leftClick() {
 
     document.getElementById('right-btn').style.color = "black";
     document.getElementById('left-btn').style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
+    document.getElementById('check-game').checked = false;
     game = 1;
+
 }
 
+
 function rightClick() {
+    if(game === 1){
+        reCountScore(2);
+    }
 	btn.style.left = '162.5px'; 
 
     const bgColor = computedStyle.getPropertyValue('--background-color').trim();
@@ -267,6 +310,7 @@ function rightClick() {
     
     document.getElementById('left-btn').style.color = "black"
     document.getElementById('right-btn').style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
+    document.getElementById('check-game').checked = true;
     game = 2;
 }
 

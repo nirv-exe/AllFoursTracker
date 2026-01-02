@@ -1113,6 +1113,10 @@ input#check, input#check-game, input.toggle-slider{
     #small-confirm-btn{
         display: flex;
     }
+
+    #showCounter{
+        display: none;
+    }
 }
 
 @media (max-width: 605px){
@@ -1155,10 +1159,6 @@ input#check, input#check-game, input.toggle-slider{
 
     #points{
         display: block !important;
-    }
-
-    #showCounter{
-        display: none;
     }
 
     .menu h1{
