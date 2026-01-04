@@ -16,6 +16,7 @@ let gamePtsTeam1 = 0;
 let gamePtsTeam2 = 0;
 
 function initGame(){
+    const rootElement = document.documentElement;
     team1Score = 0;
     team2Score = 0;
     team1Name = "Team 1";
@@ -28,6 +29,12 @@ function initGame(){
     document.getElementById('team-2-score').textContent = "0";
     document.getElementById('points').style.display = 'none';
     document.getElementById('check').checked = true;
+
+    rootElement.style.setProperty('--t1-baseColor', '#0033cc');
+    rootElement.style.setProperty("--t2-baseColor", "#cc0000");
+    rootElement.style.setProperty('--background-color', '#4d4d4d');
+    rootElement.style.setProperty('--font-colorMain', '#fff');
+    document.querySelector("body").style.backgroundImage = 'none';
 
     const allPointButtons = document.querySelectorAll('button[id*="team1"], button[id*="team2"]');
 
@@ -43,6 +50,7 @@ function initGame(){
     updateScoreDisplay();
     updateButtonStates();
     updateSettings();
+    localStorage.clear();
 }
 
 function resetGame(){
@@ -64,8 +72,10 @@ function resetGame(){
         }
     });
 
+
     updateScoreDisplay();
     updateButtonStates();
+    localStorage.clear();
 }
 
 function updateScoreDisplay() {
@@ -131,6 +141,8 @@ function changeTeam1Score(amount) {
 
     updateScoreDisplay();
     updateButtonStates();
+
+    saveGame();
 }
 
 function changeTeam2Score(amount) {
@@ -141,10 +153,16 @@ function changeTeam2Score(amount) {
     
     updateScoreDisplay();
     updateButtonStates();
+
+    saveGame();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initGame();
+    if(localStorage.getItem('allFoursGameState')) {
+        loadGameState();
+    } else {
+        initGame();
+    }
 
     updateScoreDisplay();
     updateButtonStates();
@@ -172,6 +190,8 @@ window.addPoints = function(type, team, points) {
     updateScoreDisplay();
     updateSettings();
     updateButtonStates();
+    
+    saveGame();
 };
 
 function checkWin(){    
@@ -254,6 +274,8 @@ window.editName = function(){
         document.getElementById(id).textContent = document.getElementById('team-name').value;
         closeModal('editTeamModal');
     }
+
+    saveGame();
 }
 
 let btn = document.getElementById('btn')
@@ -296,6 +318,7 @@ function leftClick() {
     document.getElementById('check-game').checked = false;
     game = 1;
 
+    saveGame();
 }
 
 
@@ -312,6 +335,8 @@ function rightClick() {
     document.getElementById('right-btn').style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
     document.getElementById('check-game').checked = true;
     game = 2;
+
+    saveGame();
 }
 
 function toggle(){  
@@ -601,6 +626,7 @@ function changeTheme(id, type){
     }
 
     toggleReset();
+    saveGame();
 }
 
 // Convert hex color (#rrggbb) → readable text color (black/white)
@@ -721,5 +747,95 @@ function setPreset(id){
     team2lumin > team1lumin ? setContrastColor(team2Color): setContrastColor(team1Color);
     document.querySelector('body').style.backgroundImage = backgroundColor;
     showPopup("Theme Successfully set!");
+
+    saveGame();
 }
 
+function saveGame(){
+    const gameState = {
+      team1Score,
+      team2Score,
+      team1Name,
+      team2Name,
+      game,
+      gamePtsTeam1,
+      gamePtsTeam2,
+      themeT1: getComputedStyle(document.documentElement)
+        .getPropertyValue("--t1-baseColor")
+        .trim(),
+      themeT2: getComputedStyle(document.documentElement)
+        .getPropertyValue("--t2-baseColor")
+        .trim(),
+      themeBG: getComputedStyle(document.documentElement)
+        .getPropertyValue("--background-color")
+        .trim(),
+      gameIsChecked: document.getElementById("check-game").checked, // Save toggle state
+    };
+
+    localStorage.setItem("allFoursGameState", JSON.stringify(gameState));
+}
+
+function loadGameState() {
+  const savedState = localStorage.getItem("allFoursGameState");
+  if (savedState) {
+    const state = JSON.parse(savedState);
+
+    // Restore variables
+    team1Score = state.team1Score;
+    team2Score = state.team2Score;
+    team1Name = state.team1Name;
+    team2Name = state.team2Name;
+    game = state.game;
+    gamePtsTeam1 = state.gamePtsTeam1;
+    gamePtsTeam2 = state.gamePtsTeam2;
+
+    // Restore UI Elements
+    document.getElementById("team1-name").textContent = team1Name;
+    document.getElementById("team2-name").textContent = team2Name;
+    document.getElementById("check-game").checked = state.gameIsChecked;
+
+    // Restore Theme Colors (Applying them back to CSS variables)
+    const root = document.documentElement.style;
+    if (state.themeT1) root.setProperty("--t1-baseColor", state.themeT1);
+    if (state.themeT2) root.setProperty("--t2-baseColor", state.themeT2);
+    if (state.themeBG) {
+      root.setProperty("--background-color", state.themeBG);
+      // Re-run contrast check for BG
+      setContrastColor(state.themeBG);
+    }
+
+    // Restore Game Mode UI (Left/Right Toggle)
+    const btn = document.getElementById("btn");
+    const computedStyle = getComputedStyle(document.documentElement);
+    const bgColor = computedStyle.getPropertyValue("--background-color").trim();
+
+    if (game === 2) {
+      btn.style.left = "162.5px";
+      document.getElementById("left-btn").style.color = "black";
+      document.getElementById(
+        "right-btn"
+      ).style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
+    } else {
+      btn.style.left = "0";
+      document.getElementById("right-btn").style.color = "black";
+      document.getElementById(
+        "left-btn"
+      ).style.color = `hsl(from ${bgColor} h s calc(l + 30))`;
+    }
+
+    // Run updates to refresh the view
+    updateScoreDisplay();
+    updateButtonStates();
+    updateSettings();
+
+    // Re-apply contrast for team cards
+    if (state.themeT1)
+      document.getElementById("team-1").style.color = getContrastColor(
+        state.themeT1
+      );
+    if (state.themeT2)
+      document.getElementById("team-2").style.color = getContrastColor(
+        state.themeT2
+      );
+  }
+}

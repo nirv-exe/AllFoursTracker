@@ -464,6 +464,17 @@ svg{
     font-size: 2.5em;
 }
 
+#points span {
+    color: var(--font-colorMain);
+
+    background-image: linear-gradient(to right, var(--t1-baseColor), var(--t2-baseColor));
+
+    background-clip: text;
+    -webkit-background-clip: text;
+
+    color: transparent;
+}
+
 a{
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
@@ -596,6 +607,7 @@ input#check, input#check-game, input.toggle-slider{
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.25s ease-in-out, filter 0.25s ease;
     filter: blur(10px);
+    pointer-events: none;
 }
 
 #small-confirm-btn > svg{
@@ -611,6 +623,7 @@ input#check, input#check-game, input.toggle-slider{
     transform: translateY(0);
     opacity: 1;
     filter: none;
+    pointer-events: all;
 }
 
 #confirm-btn > svg{
