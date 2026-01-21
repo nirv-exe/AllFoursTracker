@@ -744,7 +744,10 @@ function setPreset(id){
     root.setProperty('--t2-baseColor', team2Color);
     root.setProperty('--background-color', team1Color);
     team1lumin > team2lumin ? setContrastColor(team1Color): 
-    team2lumin > team1lumin ? setContrastColor(team2Color): setContrastColor(team1Color);
+    team2lumin > team1lumin ? setContrastColor(team2Color): 
+    setContrastColor(team1Color);
+
+    document.querySelector('.logo').
     document.querySelector('body').style.backgroundImage = backgroundColor;
     showPopup("Theme Successfully set!");
 
