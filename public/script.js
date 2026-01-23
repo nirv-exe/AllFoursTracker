@@ -739,7 +739,7 @@ function setPreset(id){
         btn.classList.remove('current-theme');
     });
 
-    document.querySelector(`#presets #${id}`).classList.add('current-theme');
+    document.querySelector(`#presets #${id}`).classList.add('current-theme');       
     root.setProperty('--t1-baseColor', team1Color);
     root.setProperty('--t2-baseColor', team2Color);
     root.setProperty('--background-color', team1Color);
@@ -747,14 +747,26 @@ function setPreset(id){
     team2lumin > team1lumin ? setContrastColor(team2Color): 
     setContrastColor(team1Color);
 
-    document.querySelector('.logo').
+    if(team2lumin === '#000'){
+        document.getElementById('logo-img').src = 'images/LogoDark.png';
+    } else {
+        document.getElementById("logo-img").src = "images/LogoLight.png";
+    }
+
     document.querySelector('body').style.backgroundImage = backgroundColor;
     showPopup("Theme Successfully set!");
 
     saveGame();
 }
 
+
 function saveGame(){
+    const bgImg = document.querySelector('body');
+    const styles = window.getComputedStyle(bgImg);
+    const img = styles.backgroundImage;
+
+    const logoSrc = document.getElementById("logo-img").getAttribute("src");
+
     const gameState = {
       team1Score,
       team2Score,
@@ -773,6 +785,8 @@ function saveGame(){
         .getPropertyValue("--background-color")
         .trim(),
       gameIsChecked: document.getElementById("check-game").checked, // Save toggle state
+      img,
+      logoSrc,
     };
 
     localStorage.setItem("allFoursGameState", JSON.stringify(gameState));
@@ -811,6 +825,8 @@ function loadGameState() {
     const btn = document.getElementById("btn");
     const computedStyle = getComputedStyle(document.documentElement);
     const bgColor = computedStyle.getPropertyValue("--background-color").trim();
+    document.querySelector('body').style.backgroundImage = state.img;   
+    document.getElementById('logo-img').src = state.logoSrc;
 
     if (game === 2) {
       btn.style.left = "162.5px";
