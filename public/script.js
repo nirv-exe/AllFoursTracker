@@ -619,6 +619,14 @@ function changeTheme(id, type){
             showPopup("Background theme successfully set!");
         }
 
+        const bgLumin = getContrastColor(color);
+
+        if (bgLumin === "#000") {
+          document.getElementById("logo-img").src = "images/LogoDark.png";
+        } else {
+          document.getElementById("logo-img").src = "images/LogoLight.png";
+        }
+
         setContrastColor(color);
     }
     else if (type == "team1" || type == "team2"){
